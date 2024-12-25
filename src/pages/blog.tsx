@@ -1,14 +1,17 @@
-import { title } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
+import AnimatedText from "@/components/AnimatedText.tsx";
 
 export default function DocsPage() {
+
+  const texts = [
+    <span key={1}>Hello, World!</span>,
+    <div key={2}>Welcome <span className={"text-lime-300"}>to</span> Framer Motion</div>,
+    <p key={3}>Enjoy Animations!</p>
+  ];
+
   return (
     <DefaultLayout>
-      <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-        <div className="inline-block max-w-lg text-center justify-center">
-          <h1 className={title()}>Blog</h1>
-        </div>
-      </section>
+      <AnimatedText texts={texts} />
     </DefaultLayout>
   );
 }
