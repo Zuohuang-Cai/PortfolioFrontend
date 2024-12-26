@@ -1,8 +1,8 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Vite + NextUI",
-  description: "Make beautiful websites regardless of your design experience.",
+  name: "Portfolio Zuohuang Cai",
+  description: "Portfolio Web for Zuohuang Cai",
   navItems: [
     {
       label: "Home",
