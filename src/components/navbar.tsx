@@ -1,115 +1,246 @@
-import { Kbd } from "@nextui-org/kbd";
-import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
-import {
-  Navbar as NextUINavbar,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem
-} from "@nextui-org/navbar";
-import { link as linkStyles } from "@nextui-org/theme";
-import clsx from "clsx";
+"use client";
 
-import { siteConfig } from "@/config/site";
-import {
-  TwitterIcon,
-  GithubIcon,
-  DiscordIcon,
-  SearchIcon
-} from "@/components/icons";
+import { Variants } from "framer-motion";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 
-export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm"
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { height } = useDimensions(containerRef);
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
-      <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
-        <div className="hidden lg:flex gap-4 justify-start ml-2">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <Link
-                className={clsx(
-                  linkStyles({ color: "foreground" }),
-                  "data-[active=true]:text-primary data-[active=true]:font-medium"
-                )}
-                color="foreground"
-                href={item.href}
-              >
-                {item.label}
-              </Link>
-            </NavbarItem>
-          ))}
-        </div>
-      </NavbarContent>
-
-      <NavbarContent
-        className="hidden sm:flex basis-1/5 sm:basis-full"
-        justify="end"
-      >
-        <NavbarItem className="hidden sm:flex gap-2">
-          <Link isExternal href={siteConfig.links.twitter} title="Twitter">
-            <TwitterIcon className="text-default-500" />
-          </Link>
-          <Link isExternal href={siteConfig.links.discord} title="Discord">
-            <DiscordIcon className="text-default-500" />
-          </Link>
-          <Link isExternal href={siteConfig.links.github} title="GitHub">
-            <GithubIcon className="text-default-500" />
-          </Link>
-        </NavbarItem>
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
-      </NavbarContent>
-
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
-        <Link isExternal href={siteConfig.links.github}>
-          <GithubIcon className="text-default-500" />
-        </Link>
-        <NavbarMenuToggle />
-      </NavbarContent>
-
-      <NavbarMenu>
-        {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
-          {siteConfig.navMenuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2
-                    ? "primary"
-                    : index === siteConfig.navMenuItems.length - 1
-                      ? "danger"
-                      : "foreground"
-                }
-                href="#"
-                size="lg"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </div>
-      </NavbarMenu>
-    </NextUINavbar>
+    <div>
+      <div style={container}>
+        <motion.nav
+          ref={containerRef}
+          animate={isOpen ? "open" : "closed"}
+          custom={height}
+          initial={false}
+          style={nav}
+        >
+          <motion.div style={background} variants={sidebarVariants} />
+          <Navigation />
+          <MenuToggle toggle={() => setIsOpen(!isOpen)} />
+        </motion.nav>
+      </div>
+    </div>
   );
+}
+
+const navVariants = {
+  open: {
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+  },
+  closed: {
+    transition: { staggerChildren: 0.05, staggerDirection: -1 },
+  },
+};
+
+const Navigation = () => (
+  <motion.ul style={list} variants={navVariants}>
+    {[0, 1, 2, 3, 4].map((i) => (
+      <MenuItem key={i} i={i} />
+    ))}
+  </motion.ul>
+);
+
+const itemVariants = {
+  open: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      y: { stiffness: 1000, velocity: -100 },
+    },
+  },
+  closed: {
+    y: 50,
+    opacity: 0,
+    transition: {
+      y: { stiffness: 1000 },
+    },
+  },
+};
+
+const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
+
+const MenuItem = ({ i }: { i: number }) => {
+  const border = `2px solid ${colors[i]}`;
+
+  return (
+    <motion.li
+      style={listItem}
+      variants={itemVariants}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      <div style={{ ...iconPlaceholder, border }} />
+      <div style={{ ...textPlaceholder, border }} />
+    </motion.li>
+  );
+};
+
+const sidebarVariants = {
+  open: (height = 1000) => ({
+    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    transition: {
+      type: "spring",
+      stiffness: 20,
+      restDelta: 2,
+    },
+  }),
+  closed: {
+    clipPath: "circle(30px at 40px 40px)",
+    transition: {
+      delay: 0.2,
+      type: "spring",
+      stiffness: 400,
+      damping: 40,
+    },
+  },
+};
+
+interface PathProps {
+  d?: string;
+  variants: Variants;
+  transition?: { duration: number };
+}
+
+const Path = (props: PathProps) => (
+  <motion.path
+    fill="transparent"
+    stroke="hsl(0, 0%, 18%)"
+    strokeLinecap="round"
+    strokeWidth="3"
+    {...props}
+  />
+);
+
+const MenuToggle = ({ toggle }: { toggle: () => void }) => (
+  <button style={toggleContainer} onClick={toggle}>
+    <svg height="23" viewBox="0 0 23 23" width="23">
+      <Path
+        variants={{
+          closed: { d: "M 2 2.5 L 20 2.5" },
+          open: { d: "M 3 16.5 L 17 2.5" },
+        }}
+      />
+      <Path
+        d="M 2 9.423 L 20 9.423"
+        transition={{ duration: 0.1 }}
+        variants={{
+          closed: { opacity: 1 },
+          open: { opacity: 0 },
+        }}
+      />
+      <Path
+        variants={{
+          closed: { d: "M 2 16.346 L 20 16.346" },
+          open: { d: "M 3 2.5 L 17 16.346" },
+        }}
+      />
+    </svg>
+  </button>
+);
+
+/**
+ * ==============   Styles   ================
+ */
+
+const container: React.CSSProperties = {
+  position: "absolute",
+  display: "flex",
+  justifyContent: "flex-start",
+  alignItems: "stretch",
+  flex: 1,
+  width: "100vw",
+  maxWidth: "100%",
+  height: "100vh",
+  backgroundColor: "var(--accent)",
+  borderRadius: 20,
+  overflow: "hidden",
+};
+
+const nav: React.CSSProperties = {
+  width: "100%",
+};
+
+const background: React.CSSProperties = {
+  backgroundColor: "#f5f5f5",
+  position: "absolute",
+  top: 0,
+  left: 0,
+  bottom: 0,
+  width: "100%",
+};
+
+const toggleContainer: React.CSSProperties = {
+  outline: "none",
+  border: "none",
+  WebkitUserSelect: "none",
+  MozUserSelect: "none",
+  cursor: "pointer",
+  position: "absolute",
+  top: 18,
+  left: 15,
+  width: 50,
+  height: 50,
+  borderRadius: "50%",
+  background: "transparent",
+};
+
+const list: React.CSSProperties = {
+  listStyle: "none",
+  padding: 25,
+  margin: 0,
+  position: "absolute",
+  top: 80,
+  width: 230,
+};
+
+const listItem: React.CSSProperties = {
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-start",
+  padding: 0,
+  margin: 0,
+  listStyle: "none",
+  marginBottom: 20,
+  cursor: "pointer",
+};
+
+const iconPlaceholder: React.CSSProperties = {
+  width: 40,
+  height: 40,
+  borderRadius: "50%",
+  flex: "40px 0",
+  marginRight: 20,
+};
+
+const textPlaceholder: React.CSSProperties = {
+  borderRadius: 5,
+  width: 200,
+  height: 20,
+  flex: 1,
+};
+
+/**
+ * ==============   Utils   ================
+ */
+
+// Naive implementation - in reality would want to attach
+// a window or resize listener. Also use state/layoutEffect instead of ref/effect
+// if this is important to know on initial client render.
+// It would be safer to  return null for unmeasured states.
+const useDimensions = (ref: React.RefObject<HTMLDivElement | null>) => {
+  const dimensions = useRef({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (ref.current) {
+      dimensions.current.width = ref.current.offsetWidth;
+      dimensions.current.height = ref.current.offsetHeight;
+    }
+  }, [ref]);
+
+  return dimensions.current;
 };

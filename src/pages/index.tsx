@@ -9,39 +9,12 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
 import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
-import AnimatedText from "@/components/AnimatedText.tsx";
 
 export default function IndexPage() {
   return (
     <DefaultLayout>
       <div className={"flex h-dvh"} style={{ background: `url(${bgImage})` }}>
-        <div className={"w-1/2 flex"}>
-          <div className={"justify-items-end w-full"}>
-            <div className={"overflow-hidden p-1 flex align-middle"}>
-              <AnimatedText
-                className={"text-7xl"}
-                duration={6}
-                texts={[
-                  <p key={1}>hello</p>,
-                  <p key={2}>how are you</p>,
-                  <p key={3}>am good</p>,
-                ]}
-              />
-            </div>
-            <div className={"overflow-hidden p-1 flex align-middle"}>
-              <AnimatedText
-                className={"text-7xl"}
-                duration={7}
-                texts={[
-                  <p key={1}>hello</p>,
-                  <p key={2}>how are you</p>,
-                  <p key={3}>am good</p>,
-                ]}
-              />
-            </div>
-          </div>
-        </div>
-
+        <div className={"w-1/2 flex"} />
         <div className={"w-1/2"} />
       </div>
 
