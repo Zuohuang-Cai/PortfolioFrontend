@@ -2,15 +2,16 @@
 
 import { Variants } from "framer-motion";
 import { motion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isHidden, setHidden] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const { height } = useDimensions(containerRef);
 
   return (
-    <div>
+    <div className={`top-0 sticky ${isOpen ? "z-50" : ""}`}>
       <div style={container}>
         <motion.nav
           ref={containerRef}
@@ -20,8 +21,17 @@ export default function Navbar() {
           style={nav}
         >
           <motion.div style={background} variants={sidebarVariants} />
-          <Navigation />
-          <MenuToggle toggle={() => setIsOpen(!isOpen)} />
+          <Navigation
+            isHidden={isHidden}
+            isOpen={isOpen}
+            setHidden={setHidden}
+          />
+          <MenuToggle
+            toggle={() => {
+              setIsOpen(!isOpen);
+              setHidden(false);
+            }}
+          />
         </motion.nav>
       </div>
     </div>
@@ -37,8 +47,23 @@ const navVariants = {
   },
 };
 
-const Navigation = () => (
-  <motion.ul style={list} variants={navVariants}>
+const Navigation = ({
+  isHidden,
+  setHidden,
+  isOpen,
+}: {
+  isHidden: boolean;
+  setHidden: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+}) => (
+  <motion.ul
+    className={`${isHidden && !isOpen ? "hidden" : ""}`}
+    style={list}
+    variants={navVariants}
+    onAnimationComplete={() => {
+      setHidden(true);
+    }}
+  >
     {[0, 1, 2, 3, 4].map((i) => (
       <MenuItem key={i} i={i} />
     ))}
@@ -149,10 +174,12 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
 
 const container: React.CSSProperties = {
   position: "absolute",
+  opacity: 0.8,
   display: "flex",
   justifyContent: "flex-start",
   alignItems: "stretch",
   flex: 1,
+  top: 0,
   width: "100vw",
   maxWidth: "100%",
   height: "100vh",
@@ -166,7 +193,7 @@ const nav: React.CSSProperties = {
 };
 
 const background: React.CSSProperties = {
-  backgroundColor: "#f5f5f5",
+  backgroundColor: "black",
   position: "absolute",
   top: 0,
   left: 0,
@@ -195,7 +222,7 @@ const list: React.CSSProperties = {
   margin: 0,
   position: "absolute",
   top: 80,
-  width: 230,
+  width: "100%",
 };
 
 const listItem: React.CSSProperties = {
