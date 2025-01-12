@@ -8,10 +8,12 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
 
+import { GithubIcon } from "@/components/icons";
+import { LinkedinIcon } from "@/components/icons";
+import { GmailLogo } from "@/components/icons";
 import Cv from "@/components/cv";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import { GithubIcon } from "@/components/icons";
 import DefaultLayout from "@/layouts/default";
 
 export default function IndexPage() {
@@ -19,9 +21,9 @@ export default function IndexPage() {
 
   return (
     <DefaultLayout>
-      <div className={"flex h-dvh bg-black"}>
-        <div className={"w-1/2 flex justify-items-center items-center"}>
-          <div className={"ml-60"}>
+      <div className={"flex flex-wrap h-dvh my-10"}>
+        <div className={"w-1/2 table:w-full flex justify-center items-center"}>
+          <div>
             <h1 className={"font-bold text-3xl my-1"}>Hello, it's me</h1>
             <h1 className={"font-bold text-5xl my-1"}>Call me Zuohuang</h1>
             <h1 className={"font-bold text-3xl my-1"}>
@@ -43,27 +45,47 @@ export default function IndexPage() {
               </span>
             </h1>
             <p className={"text-gray-400"}>
-              loren ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+              Explore freely—everything you need to know about me is right here!
             </p>
-            <div className={"flex justify-center"}>
-              <Button color="primary" endContent={Cv()}>
+            <div className={"flex justify-center flex-col my-3"}>
+              <div className={"flex"}>
+                <Link className={"mx-1"} href="https://github.com/Zuohuang-Cai">
+                  <GithubIcon />
+                </Link>
+                <Link
+                  className={"mx-1"}
+                  href="https://www.linkedin.com/in/zuohuang-cai/"
+                >
+                  <LinkedinIcon />
+                </Link>
+                <Link
+                  className={"mx-1"}
+                  href="https://mail.google.com/mail/?view=cm&fs=1&to=zc26226@gmail.com"
+                >
+                  <GmailLogo />
+                </Link>
+              </div>
+              <Button
+                className={"max-w-40 my-2"}
+                color="primary"
+                endContent={Cv()}
+              >
                 Download CV
               </Button>
             </div>
           </div>
         </div>
-        <div className={"w-1/2 flex justify-center items-center"}>
+        <div className={"w-1/2 table:w-full flex justify-center items-center"}>
           <motion.div
             animate={{ y: 20, opacity: 1 }}
             initial={{ y: -10, opacity: 0 }}
             transition={{ duration: 2 }}
           >
             <Image
-              alt="NextUI hero Image with delay"
-              height={500}
+              alt="AI Avatar"
+              className={"h-[500px] w-[400px] table:w-[300px] table:h-[400px]"}
               isZoomed={true}
               src="../public/aiAvatar.png"
-              width={400}
             />
           </motion.div>
         </div>

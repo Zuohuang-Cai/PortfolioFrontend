@@ -107,7 +107,7 @@ const MenuItem = ({ i }: { i: number }) => {
 
 const sidebarVariants = {
   open: (height = 1000) => ({
-    clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
+    clipPath: `circle(${height * 2 + 200}px at calc(100% - 40px) 40px)`,
     transition: {
       type: "spring",
       stiffness: 20,
@@ -115,7 +115,7 @@ const sidebarVariants = {
     },
   }),
   closed: {
-    clipPath: "circle(30px at 40px 40px)",
+    clipPath: "circle(30px at calc(100% - 40px) 40px)",
     transition: {
       delay: 0.2,
       type: "spring",
@@ -143,25 +143,25 @@ const Path = (props: PathProps) => (
 
 const MenuToggle = ({ toggle }: { toggle: () => void }) => (
   <button style={toggleContainer} onClick={toggle}>
-    <svg height="23" viewBox="0 0 23 23" width="23">
+    <svg fill="white" height="23" viewBox="0 0 23 23">
       <Path
         variants={{
-          closed: { d: "M 2 2.5 L 20 2.5" },
-          open: { d: "M 3 16.5 L 17 2.5" },
+          closed: { d: "M 2 2.5 L 20 2.5", stroke: "hsl(0, 0%, 99%)" },
+          open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(0, 0%, 99%)" },
         }}
       />
       <Path
         d="M 2 9.423 L 20 9.423"
         transition={{ duration: 0.1 }}
         variants={{
-          closed: { opacity: 1 },
-          open: { opacity: 0 },
+          closed: { opacity: 1, stroke: "hsl(0, 0%, 99%)" },
+          open: { opacity: 0, stroke: "hsl(0, 0%, 99%)" },
         }}
       />
       <Path
         variants={{
-          closed: { d: "M 2 16.346 L 20 16.346" },
-          open: { d: "M 3 2.5 L 17 16.346" },
+          closed: { d: "M 2 16.346 L 20 16.346", stroke: "hsl(0, 0%, 99%)" },
+          open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(0, 0%, 99%)" },
         }}
       />
     </svg>
@@ -196,7 +196,7 @@ const background: React.CSSProperties = {
   backgroundColor: "black",
   position: "absolute",
   top: 0,
-  left: 0,
+  right: 0,
   bottom: 0,
   width: "100%",
 };
@@ -209,7 +209,7 @@ const toggleContainer: React.CSSProperties = {
   cursor: "pointer",
   position: "absolute",
   top: 18,
-  left: 15,
+  right: 0,
   width: 50,
   height: 50,
   borderRadius: "50%",

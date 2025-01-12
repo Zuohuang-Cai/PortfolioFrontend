@@ -65,7 +65,7 @@ export const TwitterIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const GithubIcon: React.FC<IconSvgProps> = ({
+export const LinkedinIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,
   height,
@@ -74,6 +74,29 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
   return (
     <svg
       height={size || height}
+      viewBox="0 0 50 50"
+      width={size || width}
+      x="0px"
+      xmlns="http://www.w3.org/2000/svg"
+      y="0px"
+      {...props}
+      fill={"white"}
+    >
+      <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+    </svg>
+  );
+};
+
+export const GithubIcon: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      fill={"white"}
+      height={size || height}
       viewBox="0 0 24 24"
       width={size || width}
       {...props}
@@ -81,7 +104,7 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
       <path
         clipRule="evenodd"
         d="M12.026 2c-5.509 0-9.974 4.465-9.974 9.974 0 4.406 2.857 8.145 6.821 9.465.499.09.679-.217.679-.481 0-.237-.008-.865-.011-1.696-2.775.602-3.361-1.338-3.361-1.338-.452-1.152-1.107-1.459-1.107-1.459-.905-.619.069-.605.069-.605 1.002.07 1.527 1.028 1.527 1.028.89 1.524 2.336 1.084 2.902.829.091-.645.351-1.085.635-1.334-2.214-.251-4.542-1.107-4.542-4.93 0-1.087.389-1.979 1.024-2.675-.101-.253-.446-1.268.099-2.64 0 0 .837-.269 2.742 1.021a9.582 9.582 0 0 1 2.496-.336 9.554 9.554 0 0 1 2.496.336c1.906-1.291 2.742-1.021 2.742-1.021.545 1.372.203 2.387.099 2.64.64.696 1.024 1.587 1.024 2.675 0 3.833-2.33 4.675-4.552 4.922.355.308.675.916.675 1.846 0 1.334-.012 2.41-.012 2.737 0 .267.178.577.687.479C19.146 20.115 22 16.379 22 11.974 22 6.465 17.535 2 12.026 2z"
-        fill="currentColor"
+        fill="white"
         fillRule="evenodd"
       />
     </svg>
@@ -185,6 +208,27 @@ export const SearchIcon = (props: IconSvgProps) => (
   </svg>
 );
 
+export const GmailLogo = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}: IconSvgProps) => {
+  return (
+    <svg
+      fill={"white"}
+      height={size || height}
+      viewBox="0 0 50 50"
+      width={size || width}
+      x="0px"
+      xmlns="http://www.w3.org/2000/svg"
+      y="0px"
+      {...props}
+    >
+      <path d="M 5.5 7 C 3.019531 7 1 9.019531 1 11.5 L 1 11.925781 L 25 29 L 49 11.925781 L 49 11.5 C 49 9.019531 46.980469 7 44.5 7 Z M 6.351563 9 L 43.644531 9 L 25 22 Z M 1 14.027344 L 1 38.5 C 1 40.980469 3.019531 43 5.5 43 L 44.5 43 C 46.980469 43 49 40.980469 49 38.5 L 49 14.027344 L 43 18.296875 L 43 41 L 7 41 L 7 18.296875 Z" />
+    </svg>
+  );
+};
 export const NextUILogo: React.FC<IconSvgProps> = (props) => {
   const { width, height = 40 } = props;
 
