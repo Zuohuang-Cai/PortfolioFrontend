@@ -22,7 +22,7 @@ export default function IndexPage() {
 
   return (
     <DefaultLayout>
-      <div className={"flex flex-wrap h-dvh my-10"}>
+      <div className={"flex flex-wrap h-dvh my-10 relative"}>
         <BackgroundLight
           colorInner={"hsl(282, 100%, 50%)"}
           colorMiddle={"hsl(282, 51%, 50%)"}
@@ -106,6 +106,7 @@ export default function IndexPage() {
           </motion.div>
         </div>
       </div>
+      <div className={"h-dvh bg-purple-500"} />
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">

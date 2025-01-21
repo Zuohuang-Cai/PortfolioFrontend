@@ -32,7 +32,10 @@ function BackgroundLight({
         controls.start({
           top: `${positionFormula(currentMousePosition.y)}%`,
           left: `${positionFormula(currentMousePosition.x)}%`,
-          transition: { type: "spring", stiffness: 200, damping: 200 },
+          transition: {
+            duration: 2,
+            ease: "easeOut",
+          },
         });
       }
     };
