@@ -19,13 +19,21 @@ import BackgroundLight from "@/components/backgroundLight.tsx";
 
 import "@devnomic/marquee/dist/index.css";
 import RotatedCross from "@/components/RotatedCross.tsx";
+import LightLine from "@/components/LightLine.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
 
   return (
     <DefaultLayout>
-      <div className={"flex flex-wrap h-dvh my-10 relative"}>
+      <div className={"flex flex-wrap h-dvh relative"}>
+        <div className={"h-full w-full overflow-hidden absolute"}>
+          <LightLine left={10} rotate={"rotate-[115deg]"} top={287} />
+          <LightLine left={10} rotate={"rotate-[15deg]"} top={587} />
+          <LightLine left={10} rotate={"rotate-[150deg]"} top={0} />
+          <LightLine left={10} rotate={"rotate-[-40deg]"} top={700} />
+          <LightLine left={10} rotate={"rotate-[40deg]"} top={100} />
+        </div>
         <BackgroundLight
           colorInner={"hsl(282, 100%, 50%)"}
           colorMiddle={"hsl(282, 51%, 50%)"}
@@ -122,7 +130,17 @@ export default function IndexPage() {
           <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
         </div>
         <div className={"w-[70%] bg-red-700 rounded-[10%]"} />
-        <div className={"w-[15%] bg-black"} />
+        <div
+          className={
+            "w-[15%] bg-black flex flex-col justify-around items-center"
+          }
+        >
+          <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
+          <h1>PORTRAIT</h1>
+          <RotatedCross />
+          <h1>PORTRAIT</h1>
+          <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
+        </div>
       </div>
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">

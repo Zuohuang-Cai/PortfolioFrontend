@@ -9,34 +9,27 @@ function RotatedCross({
   classNameInner?: string;
 }) {
   const [rotate, setRotate] = useState(0);
-  const [duration, setDuration] = useState(1);
+  const repeatDelay = 3;
 
   useEffect(() => {
     const interval = setInterval(() => {
       setRotate((rotate) => {
-        if (rotate === 360) {
-          setDuration(0.5);
-
-          return -360;
-        }
-        setDuration(0.1);
-
         return rotate + 45;
       });
-    }, 1000);
+    }, repeatDelay * 1000);
 
     return () => clearInterval(interval);
-  }, [rotate, duration]);
+  }, [rotate]);
 
   return (
     <motion.div
       animate={{ rotate: rotate }}
       className={`w-[25px] h-[25px] flex justify-center ${classNameOuter}`}
       transition={{
-        duration: duration,
-        repeatDelay: 1,
+        duration: 0.1,
+        repeatDelay: repeatDelay,
         repeat: Infinity,
-        ease: "easeIn",
+        ease: "backInOut",
       }}
     >
       <div
