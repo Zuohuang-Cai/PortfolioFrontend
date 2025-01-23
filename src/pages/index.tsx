@@ -17,6 +17,9 @@ import { title, subtitle } from "@/components/primitives";
 import DefaultLayout from "@/layouts/default";
 import BackgroundLight from "@/components/backgroundLight.tsx";
 
+import "@devnomic/marquee/dist/index.css";
+import RotatedCross from "@/components/RotatedCross.tsx";
+
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
 
@@ -106,7 +109,21 @@ export default function IndexPage() {
           </motion.div>
         </div>
       </div>
-      <div className={"h-dvh bg-purple-500"} />
+      <div className={"h-dvh w-dvw bg-purple-500 flex"}>
+        <div
+          className={
+            "w-[15%] bg-black flex flex-col justify-around items-center"
+          }
+        >
+          <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
+          <h1>PORTRAIT</h1>
+          <RotatedCross />
+          <h1>PORTRAIT</h1>
+          <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
+        </div>
+        <div className={"w-[70%] bg-red-700 rounded-[10%]"} />
+        <div className={"w-[15%] bg-black"} />
+      </div>
 
       <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
         <div className="inline-block max-w-lg text-center justify-center">
