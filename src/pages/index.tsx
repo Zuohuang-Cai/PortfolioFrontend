@@ -20,6 +20,7 @@ import BackgroundLight from "@/components/backgroundLight.tsx";
 import "@devnomic/marquee/dist/index.css";
 import RotatedCross from "@/components/RotatedCross.tsx";
 import LightLine from "@/components/LightLine.tsx";
+import { Slippery } from "@/components/icons";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -116,6 +117,9 @@ export default function IndexPage() {
             />
           </motion.div>
         </div>
+      </div>
+      <div className={"h-[20vh] bg-green-950 w-full"}>
+        <Slippery className={"w-[100%] h-[100%]"} />
       </div>
       <div className={"h-dvh w-dvw bg-purple-500 flex"}>
         <div

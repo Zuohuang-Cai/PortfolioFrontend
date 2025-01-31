@@ -58,7 +58,7 @@ function BackgroundLight({
   return (
     <motion.div
       animate={controls}
-      className={"absolute rounded-full border-0"}
+      className={"absolute rounded-full border-0 before:content-['']"}
       style={light}
       onAnimationComplete={() => {
         setOldMousePosition({

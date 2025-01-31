@@ -14,7 +14,7 @@ function LightLine({
       <motion.div
         animate={{
           scaleX: window.innerWidth * 2,
-          opacity: [0, 0.6, 0],
+          opacity: [0, 0.3, 0.6, 0.3, 0.7, 0],
         }}
         className="absolute bg-red-500 w-[1px] h-[0.1px] z-10 opacity-0"
         style={{

@@ -87,6 +87,38 @@ export const LinkedinIcon: React.FC<IconSvgProps> = ({
   );
 };
 
+export const Slippery: React.FC<IconSvgProps> = ({
+  size = 24,
+  width,
+  height,
+  ...props
+}) => {
+  return (
+    <svg
+      fill={"white"}
+      height={size || height}
+      viewBox="0 0 500 800"
+      width={size || width}
+      {...props}
+    >
+      <polygon
+        className="hws_brand_left"
+        points="92.6,93.3 25.2,733.1 83.6,727.8 "
+      />
+      <path
+        className="hws_brand_right"
+        d="M380.4,79.4L108.7,44.7l8.2,755.3l97.4-12.9l14.1-69.3l140.5-17.2l29.1,
+                            67l76.8-12L380.4,79.4z M330.6,143.9 l6.3,58.4l-153.1-11.6l-3.5-65.3L330.6,143.9z M136.9,
+                            582.4L129,216.9l260.6,16.4l44.6,331.9L136.9,582.4z"
+      />
+      <g className="hws_brand_arrow">
+        <path d="M314.2,494.9c0,0,5.3-59.9-28.6-115.1c-35.1-57.4-86.6-65.3-86.6-65.3" />
+        <path d="M266.9,454.3c0,0,34.2,45.4,49.8,44c15.5-1.4,34.5-52.5,34.5-52.5" />
+      </g>
+    </svg>
+  );
+};
+
 export const GithubIcon: React.FC<IconSvgProps> = ({
   size = 24,
   width,
