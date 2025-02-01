@@ -1,4 +1,5 @@
 import * as React from "react";
+import { motion } from "framer-motion";
 
 import { IconSvgProps } from "@/types";
 
@@ -87,19 +88,24 @@ export const LinkedinIcon: React.FC<IconSvgProps> = ({
   );
 };
 
-export const Slippery: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+export const Slippery: any = ({ size = 24, width, height, ...props }) => {
   return (
-    <svg
+    <motion.svg
       fill={"white"}
       height={size || height}
       viewBox="0 0 500 800"
       width={size || width}
       {...props}
+      animate={{
+        rotateZ: [0, 180, 180, 360],
+      }}
+      transition={{
+        duration: 4,
+        times: [0, 0.1, 0.9, 1],
+        repeatDelay: 3,
+        repeat: Infinity,
+        ease: "linear",
+      }}
     >
       <polygon
         className="hws_brand_left"
@@ -111,11 +117,22 @@ export const Slippery: React.FC<IconSvgProps> = ({
                             67l76.8-12L380.4,79.4z M330.6,143.9 l6.3,58.4l-153.1-11.6l-3.5-65.3L330.6,143.9z M136.9,
                             582.4L129,216.9l260.6,16.4l44.6,331.9L136.9,582.4z"
       />
-      <g className="hws_brand_arrow">
+      <motion.g
+        animate={{
+          rotateZ: [0, 180, 180, 0],
+        }}
+        className="hws_brand_arrow h-[5px] w-[5px] fill-red-600"
+        transition={{
+          duration: 2,
+          repeatDelay: 5,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
         <path d="M314.2,494.9c0,0,5.3-59.9-28.6-115.1c-35.1-57.4-86.6-65.3-86.6-65.3" />
         <path d="M266.9,454.3c0,0,34.2,45.4,49.8,44c15.5-1.4,34.5-52.5,34.5-52.5" />
-      </g>
-    </svg>
+      </motion.g>
+    </motion.svg>
   );
 };
 

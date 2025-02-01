@@ -118,8 +118,11 @@ export default function IndexPage() {
           </motion.div>
         </div>
       </div>
-      <div className={"h-[20vh] bg-green-950 w-full"}>
-        <Slippery className={"w-[100%] h-[100%]"} />
+      <div className={"h-[20vh] w-full justify-items-center"}>
+        <Slippery className={"w-[100px] h-[100px]"} />
+        <p className={"text-red-600 font-bold text-center"}>
+          - Scroll carefully, it's smooth -{" "}
+        </p>
       </div>
       <div className={"h-dvh w-dvw bg-purple-500 flex"}>
         <div
