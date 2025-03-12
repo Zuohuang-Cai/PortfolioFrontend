@@ -21,6 +21,7 @@ import "@devnomic/marquee/dist/index.css";
 import RotatedCross from "@/components/RotatedCross.tsx";
 import LightLine from "@/components/LightLine.tsx";
 import { Slippery } from "@/components/icons";
+import Photography from "@/components/photography.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -52,29 +53,32 @@ export default function IndexPage() {
 
         <div className={"w-1/2 table:w-full flex justify-center items-center"}>
           <div>
-            <h1 className={"font-bold text-3xl my-1"}>Hello, it's me</h1>
-            <h1 className={"font-bold text-5xl my-1"}>Call me Zuohuang</h1>
-            <h1 className={"font-bold text-3xl my-1"}>
-              And i'm a{" "}
-              <span className={`${textColor} text-2xl`}>
-                <TypeAnimation
-                  repeat={Infinity}
-                  sequence={[
-                    "Full Stack Developer",
-                    800,
-                    () => setTextColor("text-pink-700"),
-                    "Database Designer",
-                    1000,
-                    () => setTextColor("text-indigo-500"),
-                    "League of Legends Player",
-                    100,
-                  ]}
-                />
-              </span>
-            </h1>
-            <p className={"text-gray-400"}>
-              Explore freely—everything you need to know about me is right here!
-            </p>
+            <div>
+              <h1 className={"font-bold text-3xl my-1"}>Hello, it&#39;s me</h1>
+              <h1 className={"font-bold text-5xl my-1"}>Call me Zuohuang</h1>
+              <h1 className={"font-bold text-3xl my-1"}>
+                And i&#39;m a{" "}
+                <span className={`${textColor} text-2xl`}>
+                  <TypeAnimation
+                    repeat={Infinity}
+                    sequence={[
+                      "Full Stack Developer",
+                      800,
+                      () => setTextColor("text-pink-700"),
+                      "Database Designer",
+                      1000,
+                      () => setTextColor("text-indigo-500"),
+                      "League of Legends Player",
+                      100,
+                    ]}
+                  />
+                </span>
+              </h1>
+              <p className={"text-gray-400"}>
+                Explore freely—everything you need to know about me is right
+                here!
+              </p>
+            </div>
             <div className={"flex justify-center flex-col my-3"}>
               <div className={"flex"}>
                 <Link className={"mx-1"} href="https://github.com/Zuohuang-Cai">
@@ -106,6 +110,7 @@ export default function IndexPage() {
         <div className={"w-1/2 table:w-full flex justify-center items-center"}>
           <motion.div
             animate={{ y: 20, opacity: 1 }}
+            className={"z-10"}
             initial={{ y: -10, opacity: 0 }}
             transition={{ duration: 2 }}
           >
@@ -121,10 +126,10 @@ export default function IndexPage() {
       <div className={"h-[20vh] w-full justify-items-center"}>
         <Slippery className={"w-[100px] h-[100px]"} />
         <p className={"text-red-600 font-bold text-center"}>
-          - Scroll carefully, it's smooth -{" "}
+          - Scroll carefully, it&#39;s smooth -{" "}
         </p>
       </div>
-      <div className={"h-dvh w-dvw bg-purple-500 flex"}>
+      <div className={"h-dvh w-full bg-purple-500 flex"}>
         <div
           className={
             "w-[15%] bg-black flex flex-col justify-around items-center"
@@ -136,7 +141,9 @@ export default function IndexPage() {
           <h1>PORTRAIT</h1>
           <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
         </div>
-        <div className={"w-[70%] bg-red-700 rounded-[10%]"} />
+        <div className={"w-[70%] bg-red-700 rounded-[10%]"}>
+          <Photography />
+        </div>
         <div
           className={
             "w-[15%] bg-black flex flex-col justify-around items-center"

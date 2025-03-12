@@ -9,9 +9,10 @@ export default function Navbar() {
   const [isHidden, setHidden] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const { height } = useDimensions(containerRef);
+  const [zIndex, setZIndex] = useState("z-10");
 
   return (
-    <div className={`top-0 sticky ${isOpen ? "z-50" : ""}`}>
+    <div className={`top-0 sticky ${zIndex}`}>
       <div style={container}>
         <motion.nav
           ref={containerRef}
@@ -25,6 +26,7 @@ export default function Navbar() {
             isHidden={isHidden}
             isOpen={isOpen}
             setHidden={setHidden}
+            setZIndex={setZIndex}
           />
           <MenuToggle
             toggle={() => {
@@ -51,10 +53,12 @@ const Navigation = ({
   isHidden,
   setHidden,
   isOpen,
+  setZIndex,
 }: {
   isHidden: boolean;
   setHidden: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
+  setZIndex: React.Dispatch<React.SetStateAction<string>>;
 }) => (
   <motion.ul
     className={`${isHidden && !isOpen ? "hidden" : ""}`}
@@ -62,6 +66,12 @@ const Navigation = ({
     variants={navVariants}
     onAnimationComplete={() => {
       setHidden(true);
+      if (!isOpen) {
+        setZIndex("z-10");
+      }
+    }}
+    onAnimationStart={() => {
+      setZIndex("z-50");
     }}
   >
     {[0, 1, 2, 3, 4].map((i) => (
