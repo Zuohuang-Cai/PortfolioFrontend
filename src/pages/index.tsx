@@ -28,7 +28,7 @@ export default function IndexPage() {
 
   return (
     <DefaultLayout>
-      <div className={"flex flex-wrap h-dvh relative"}>
+      <div className={"flex flex-wrap min-h-dvh relative"}>
         <div className={"h-full w-full overflow-hidden absolute"}>
           <LightLine left={10} rotate={"rotate-[115deg]"} top={287} />
           <LightLine left={10} rotate={"rotate-[15deg]"} top={587} />
@@ -51,7 +51,9 @@ export default function IndexPage() {
           // positionFormula={(n) => n * -1 + 100}
         />
 
-        <div className={"w-1/2 table:w-full flex justify-center items-center"}>
+        <div
+          className={"w-1/2 table:w-full flex justify-center items-center z-10"}
+        >
           <div>
             <div>
               <h1 className={"font-bold text-3xl my-1"}>Hello, it&#39;s me</h1>
@@ -109,9 +111,9 @@ export default function IndexPage() {
         </div>
         <div className={"w-1/2 table:w-full flex justify-center items-center"}>
           <motion.div
-            animate={{ y: 20, opacity: 1 }}
+            animate={{ y: 0, opacity: 1 }}
             className={"z-10"}
-            initial={{ y: -10, opacity: 0 }}
+            initial={{ y: -20, opacity: 0 }}
             transition={{ duration: 2 }}
           >
             <Image

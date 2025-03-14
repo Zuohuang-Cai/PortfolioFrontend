@@ -12,31 +12,36 @@ export default function Navbar() {
   const [zIndex, setZIndex] = useState("z-10");
 
   return (
-    <div className={`top-0 sticky ${zIndex}`}>
-      <div style={container}>
-        <motion.nav
-          ref={containerRef}
-          animate={isOpen ? "open" : "closed"}
-          custom={height}
-          initial={false}
-          style={nav}
-        >
-          <motion.div style={background} variants={sidebarVariants} />
-          <Navigation
-            isHidden={isHidden}
-            isOpen={isOpen}
-            setHidden={setHidden}
-            setZIndex={setZIndex}
-          />
-          <MenuToggle
-            toggle={() => {
-              setIsOpen(!isOpen);
-              setHidden(false);
-            }}
-          />
-        </motion.nav>
+    <>
+      <div className={"sticky top-0"} style={{ zIndex: "100" }}>
+        <MenuToggle
+          isOpen={isOpen}
+          toggle={() => {
+            setIsOpen(!isOpen);
+            setHidden(false);
+          }}
+        />
       </div>
-    </div>
+      <div className={`top-0 sticky ${zIndex}`}>
+        <div style={container}>
+          <motion.nav
+            ref={containerRef}
+            animate={isOpen ? "open" : "closed"}
+            custom={height}
+            initial={false}
+            style={nav}
+          >
+            <motion.div style={background} variants={sidebarVariants} />
+            <Navigation
+              isHidden={isHidden}
+              isOpen={isOpen}
+              setHidden={setHidden}
+              setZIndex={setZIndex}
+            />
+          </motion.nav>
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -137,12 +142,15 @@ const sidebarVariants = {
 
 interface PathProps {
   d?: string;
+  isOpen: boolean;
   variants: Variants;
   transition?: { duration: number };
 }
 
 const Path = (props: PathProps) => (
   <motion.path
+    animate={props.isOpen ? "open" : "closed"}
+    className={"w-[20px]"}
     fill="transparent"
     stroke="hsl(0, 0%, 18%)"
     strokeLinecap="round"
@@ -151,10 +159,17 @@ const Path = (props: PathProps) => (
   />
 );
 
-const MenuToggle = ({ toggle }: { toggle: () => void }) => (
+const MenuToggle = ({
+  toggle,
+  isOpen,
+}: {
+  toggle: () => void;
+  isOpen: boolean;
+}) => (
   <button style={toggleContainer} onClick={toggle}>
     <svg fill="white" height="23" viewBox="0 0 23 23">
       <Path
+        isOpen={isOpen}
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5", stroke: "hsl(0, 0%, 99%)" },
           open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(0, 0%, 99%)" },
@@ -162,6 +177,7 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
       />
       <Path
         d="M 2 9.423 L 20 9.423"
+        isOpen={isOpen}
         transition={{ duration: 0.1 }}
         variants={{
           closed: { opacity: 1, stroke: "hsl(0, 0%, 99%)" },
@@ -169,6 +185,7 @@ const MenuToggle = ({ toggle }: { toggle: () => void }) => (
         }}
       />
       <Path
+        isOpen={isOpen}
         variants={{
           closed: { d: "M 2 16.346 L 20 16.346", stroke: "hsl(0, 0%, 99%)" },
           open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(0, 0%, 99%)" },
