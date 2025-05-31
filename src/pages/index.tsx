@@ -120,7 +120,7 @@ export default function IndexPage() {
               alt="AI Avatar"
               className={"h-[500px] w-[400px] table:w-[300px] table:h-[400px]"}
               isZoomed={true}
-              src="../public/aiAvatar.png"
+              src="../../public/AiAvatar.png"
             />
           </motion.div>
         </div>
