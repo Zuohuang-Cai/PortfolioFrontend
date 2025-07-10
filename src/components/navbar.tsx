@@ -9,7 +9,7 @@ export default function Navbar() {
   const [isHidden, setHidden] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const { height } = useDimensions(containerRef);
-  const [zIndex, setZIndex] = useState("z-10");
+  const [zIndex, setZIndex] = useState("-z-10");
 
   return (
     <>
@@ -72,7 +72,7 @@ const Navigation = ({
     onAnimationComplete={() => {
       setHidden(true);
       if (!isOpen) {
-        setZIndex("z-10");
+        setZIndex("-z-10");
       }
     }}
     onAnimationStart={() => {

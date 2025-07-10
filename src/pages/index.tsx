@@ -23,6 +23,7 @@ import LightLine from "@/components/LightLine.tsx";
 import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography.tsx";
 import SmoothScroll from "@/components/smoothScroll.tsx";
+import Quations from "@/components/svgs/quations.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -169,6 +170,14 @@ export default function IndexPage() {
             <RotatedCross />
             <h1>PORTRAIT</h1>
             <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
+          </div>
+        </div>
+
+        <div className={"h-[100vh] mt-28"}>
+          <div className={"flex flex-col"}>
+            <h1 className={"text-7xl font-black"}>what skills</h1>
+            <h1 className={"text-7xl font-black"}>can i have</h1>
+            <Quations />
           </div>
         </div>
 
