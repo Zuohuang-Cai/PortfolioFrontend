@@ -6,19 +6,18 @@ const Quations = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div ref={ref} className={"w-1/2 h-[198px]"}>
+    <div ref={ref} className={"w-1/2 h-[198px] flex self-center"}>
       {isInView && (
         <motion.svg
           animate={{
-            x: 100,
-            y: -70,
+            y: [60,0],
+            x: [-100,-200],
             rotate: -20,
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
           ref={ref}
-          width="50%"
-          height="198"
-          viewBox="0 0 252 198"
+          viewBox="100 0 252 198"
+          className={"w-3/4 h-3/4"}
           fill="white"
           xmlns="http://www.w3.org/2000/svg"
         >

@@ -24,6 +24,7 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography.tsx";
 import SmoothScroll from "@/components/smoothScroll.tsx";
 import Quations from "@/components/svgs/quations.tsx";
+import ScrollX from "@/components/scrollX.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -176,9 +177,12 @@ export default function IndexPage() {
         <div className={"h-[100vh] mt-28"}>
           <div className={"flex flex-col"}>
             <h1 className={"text-7xl font-black"}>what skills</h1>
-            <h1 className={"text-7xl font-black"}>can i have</h1>
-            <Quations />
+            <div className={"flex justify-start"}>
+              <h1 className={"text-7xl font-black"}>can i have</h1>
+              <Quations />
+            </div>
           </div>
+          <ScrollX />
         </div>
 
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
