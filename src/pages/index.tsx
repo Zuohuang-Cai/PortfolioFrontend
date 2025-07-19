@@ -24,10 +24,10 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography.tsx";
 import SmoothScroll from "@/components/smoothScroll.tsx";
 import Quations from "@/components/svgs/quations.tsx";
-import ScrollX from "@/components/scrollX.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
+
   return (
     <DefaultLayout>
       <SmoothScroll>
@@ -182,7 +182,6 @@ export default function IndexPage() {
               <Quations />
             </div>
           </div>
-          <ScrollX />
         </div>
 
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">

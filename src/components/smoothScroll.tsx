@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 interface Props {
   children: React.ReactNode;
+  keepScroll: boolean;
 }
 
 export default function SmoothScroll({ children }: Props) {
@@ -13,15 +14,16 @@ export default function SmoothScroll({ children }: Props) {
 
   const springConfig = React.useMemo(() => {
     return {
-      damping: 30,
-      stiffness: 100,
-      mass: 1,
+      damping: 20,
+      stiffness: 1000,
+      mass: 2,
     };
   }, []);
 
   const y = useSpring(
     useTransform(scrollY, (latest) => {
       springConfig.stiffness = Math.max(50, Math.min(200, 1));
+
       return -latest;
     }),
     springConfig,
@@ -34,7 +36,6 @@ export default function SmoothScroll({ children }: Props) {
       const contentHeight = contentRef.current?.clientHeight || 0;
       document.body.style.height = `${contentHeight}px`;
     };
-
     updateHeight();
 
     window.addEventListener("resize", updateHeight);
