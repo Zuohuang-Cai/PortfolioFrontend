@@ -24,6 +24,7 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography.tsx";
 import SmoothScroll from "@/components/smoothScroll.tsx";
 import Quations from "@/components/svgs/quations.tsx";
+import { useSmoothScroll } from "@/context/smoothScrollContext.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");

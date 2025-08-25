@@ -1,17 +1,23 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useSmoothScroll } from "@/context/smoothScrollContext.tsx";
 
 const Quations = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const isInView = useInView(ref, { amount: "all" });
+  const { pause, resume } = useSmoothScroll();
+
+  useEffect(() => {
+    if (isInView) pause();
+  }, [isInView]);
 
   return (
     <div ref={ref} className={"w-1/2 h-[198px] flex self-center"}>
       {isInView && (
         <motion.svg
           animate={{
-            y: [60,0],
-            x: [-100,-200],
+            y: [60, 0],
+            x: [-100, -200],
             rotate: -20,
           }}
           transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
