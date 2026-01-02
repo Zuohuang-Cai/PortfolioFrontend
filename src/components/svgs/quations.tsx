@@ -1,30 +1,24 @@
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
-import { useSmoothScroll } from "@/context/smoothScrollContext.tsx";
+import { useRef } from "react";
 
 const Quations = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { amount: "all" });
-  const { pause, resume } = useSmoothScroll();
-
-  useEffect(() => {
-    if (isInView) pause();
-  }, [isInView]);
 
   return (
     <div ref={ref} className={"w-1/2 h-[198px] flex self-center"}>
       {isInView && (
         <motion.svg
+          ref={ref}
           animate={{
             y: [60, 0],
             x: [-100, -200],
             rotate: -20,
           }}
-          transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
-          ref={ref}
-          viewBox="100 0 252 198"
           className={"w-3/4 h-3/4"}
           fill="white"
+          transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
+          viewBox="100 0 252 198"
           xmlns="http://www.w3.org/2000/svg"
         >
           {/*background*/}
@@ -38,9 +32,9 @@ const Quations = () => {
               x: 100,
               y: [0, 80, 0],
             }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
             d="M187.457 109.287C181.649 109.287 176.906 104.544 176.906 98.736C176.906 92.894 181.649 88.185 187.457 88.185C193.265 88.185 198.008 92.928 198.008 98.736C198.008 104.544 193.265 109.287 187.457 109.287Z"
             fill="white"
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           />
 
           {/*quationHead*/}
@@ -49,9 +43,9 @@ const Quations = () => {
               x: 100,
               y: [0, 80, 0],
             }}
-            transition={{ duration: 1, ease: "easeInOut" }}
             d="M212.854 58.836C211.342 61.07 208.696 63.716 204.537 66.74L200.379 69.764C198.18 71.62 196.667 73.476 195.877 75.778C195.43 77.29 195.087 79.558 195.087 82.583H179.656C180 76.191 180.378 71.689 181.512 69.386C182.234 67.083 184.88 64.059 189.004 61.069L192.819 57.701C194.331 56.636 195.396 55.467 196.187 54.333C197.699 52.409 198.489 50.175 198.489 47.528C198.489 44.504 197.355 41.926 195.843 39.624C194.331 37.39 191.306 36.256 186.804 36.256C182.302 36.256 179.278 37.734 177.422 40.758C175.91 42.992 174.776 46.016 174.776 48.662C174.776 49.109 174.776 49.109 174.776 49.452C174.329 53.61 170.961 56.944 166.459 56.944C161.957 56.944 158.486 53.576 158.142 49.418C158.142 49.418 158.142 47.562 158.142 46.772C159.276 37.321 163.091 30.585 169.448 26.427C173.985 23.781 179.655 22.269 186.013 22.269C194.639 22.269 201.787 24.125 207.458 28.283C213.06 32.441 216.084 38.456 216.668 46.429C216.669 51.31 215.501 55.468 212.854 58.836Z"
             fill="white"
+            transition={{ duration: 1, ease: "easeInOut" }}
           />
           {/*hands*/}
           <motion.path
