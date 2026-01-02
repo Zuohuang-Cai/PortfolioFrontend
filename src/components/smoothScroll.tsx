@@ -63,11 +63,14 @@ export default function SmoothScroll({ children }: Props) {
     if (!contentRef.current) return;
     const updateHeight = () => {
       const contentHeight = contentRef.current?.clientHeight || 0;
+
       document.body.style.height = `${contentHeight}px`;
     };
+
     updateHeight();
 
     window.addEventListener("resize", updateHeight);
+
     return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
