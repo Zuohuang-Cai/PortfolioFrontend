@@ -26,26 +26,25 @@ export default function SmoothScroll({ children }: Props) {
   const [isPaused, setIsPaused] = useState(false);
   const [anchor, setAnchor] = useState<number>(0);
   const contentRef = useRef<HTMLDivElement>(null);
-
   const { scrollY } = useScroll();
+
 
   const springConfig = React.useMemo(() => {
     return {
       damping: 20,
       stiffness: 1000,
-      mass: 2,
+      mass: 2
     };
   }, []);
 
   const y = useSpring(
     useTransform(scrollY, (latest) => {
-      console.log(scrollY);
       if (isPaused) return anchor;
       springConfig.stiffness = Math.max(50, Math.min(200, 1));
 
       return -latest;
     }),
-    springConfig,
+    springConfig
   );
 
   const pause = () => {
@@ -75,7 +74,7 @@ export default function SmoothScroll({ children }: Props) {
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ y, pause, resume }}>
+    <SmoothScrollContext.Provider value={{ y, pause, resume}}>
       <motion.div
         ref={scrollRef}
         style={{
@@ -85,7 +84,7 @@ export default function SmoothScroll({ children }: Props) {
           height: "100vh",
           width: "100%",
           y,
-          willChange: "transform",
+          willChange: "transform"
         }}
       >
         <div ref={contentRef}>{children}</div>

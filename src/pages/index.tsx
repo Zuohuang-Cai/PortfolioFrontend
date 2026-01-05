@@ -24,6 +24,7 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography.tsx";
 import SmoothScroll from "@/components/smoothScroll.tsx";
 import Quations from "@/components/svgs/quations.tsx";
+import HorizontalScroll from "@/components/horizontalScroll.tsx";
 
 export default function IndexPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -78,7 +79,7 @@ export default function IndexPage() {
                         1000,
                         () => setTextColor("text-indigo-500"),
                         "League of Legends Player",
-                        100,
+                        100
                       ]}
                     />
                   </span>
@@ -182,8 +183,12 @@ export default function IndexPage() {
               <Quations />
             </div>
           </div>
-          <div className={"flex bg-amber-100 w-full h-full"} />
+          <div className={"flex bg-amber-100 w-full h-full"}>
+            <HorizontalScroll />
+          </div>
         </div>
+
+        <div className={"h-[100vh] w-full bg-pink-200"}></div>
 
         <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
           <div className="inline-block max-w-lg text-center justify-center">
@@ -203,7 +208,7 @@ export default function IndexPage() {
               className={buttonStyles({
                 color: "primary",
                 radius: "full",
-                variant: "shadow",
+                variant: "shadow"
               })}
               href={siteConfig.links.docs}
             >
