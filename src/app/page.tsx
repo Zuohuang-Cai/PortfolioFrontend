@@ -174,7 +174,7 @@ export default function Home() {
         </div>
 
         {/* Skills Section */}
-        <div className={"min-h-[100vh] flex flex-col bg-black"}>
+        <div className={"h-screen w-full"}>
           <HorizontalScroll />
         </div>
 
