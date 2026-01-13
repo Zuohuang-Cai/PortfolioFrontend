@@ -47,19 +47,19 @@ export default function Navbar() {
 
 const navVariants = {
   open: {
-    transition: { staggerChildren: 0.07, delayChildren: 0.2 },
+    transition: { staggerChildren: 0.07, delayChildren: 0.2 }
   },
   closed: {
-    transition: { staggerChildren: 0.05, staggerDirection: -1 },
-  },
+    transition: { staggerChildren: 0.05, staggerDirection: -1 }
+  }
 };
 
 const Navigation = ({
-  isHidden,
-  setHidden,
-  isOpen,
-  setZIndex,
-}: {
+                      isHidden,
+                      setHidden,
+                      isOpen,
+                      setZIndex
+                    }: {
   isHidden: boolean;
   setHidden: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
@@ -90,16 +90,16 @@ const itemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      y: { stiffness: 1000, velocity: -100 },
-    },
+      y: { stiffness: 1000, velocity: -100 }
+    }
   },
   closed: {
     y: 50,
     opacity: 0,
     transition: {
-      y: { stiffness: 1000 },
-    },
-  },
+      y: { stiffness: 1000 }
+    }
+  }
 };
 
 const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
@@ -126,8 +126,8 @@ const sidebarVariants = {
     transition: {
       type: "spring",
       stiffness: 20,
-      restDelta: 2,
-    },
+      restDelta: 2
+    }
   }),
   closed: {
     clipPath: "circle(30px at calc(100% - 40px) 40px)",
@@ -135,9 +135,9 @@ const sidebarVariants = {
       delay: 0.2,
       type: "spring",
       stiffness: 400,
-      damping: 40,
-    },
-  },
+      damping: 40
+    }
+  }
 };
 
 interface PathProps {
@@ -147,9 +147,9 @@ interface PathProps {
   transition?: { duration: number };
 }
 
-const Path = (props: PathProps) => (
+const Path = ({ isOpen, ...props }: PathProps) => (
   <motion.path
-    animate={props.isOpen ? "open" : "closed"}
+    animate={isOpen ? "open" : "closed"}
     className={"w-[20px]"}
     fill="transparent"
     stroke="hsl(0, 0%, 18%)"
@@ -160,9 +160,9 @@ const Path = (props: PathProps) => (
 );
 
 const MenuToggle = ({
-  toggle,
-  isOpen,
-}: {
+                      toggle,
+                      isOpen
+                    }: {
   toggle: () => void;
   isOpen: boolean;
 }) => (
@@ -172,7 +172,7 @@ const MenuToggle = ({
         isOpen={isOpen}
         variants={{
           closed: { d: "M 2 2.5 L 20 2.5", stroke: "hsl(0, 0%, 99%)" },
-          open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(0, 0%, 99%)" },
+          open: { d: "M 3 16.5 L 17 2.5", stroke: "hsl(0, 0%, 99%)" }
         }}
       />
       <Path
@@ -181,14 +181,14 @@ const MenuToggle = ({
         transition={{ duration: 0.1 }}
         variants={{
           closed: { opacity: 1, stroke: "hsl(0, 0%, 99%)" },
-          open: { opacity: 0, stroke: "hsl(0, 0%, 99%)" },
+          open: { opacity: 0, stroke: "hsl(0, 0%, 99%)" }
         }}
       />
       <Path
         isOpen={isOpen}
         variants={{
           closed: { d: "M 2 16.346 L 20 16.346", stroke: "hsl(0, 0%, 99%)" },
-          open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(0, 0%, 99%)" },
+          open: { d: "M 3 2.5 L 17 16.346", stroke: "hsl(0, 0%, 99%)" }
         }}
       />
     </svg>
@@ -212,11 +212,11 @@ const container: React.CSSProperties = {
   height: "100vh",
   backgroundColor: "var(--accent)",
   borderRadius: 20,
-  overflow: "hidden",
+  overflow: "hidden"
 };
 
 const nav: React.CSSProperties = {
-  width: "100%",
+  width: "100%"
 };
 
 const background: React.CSSProperties = {
@@ -225,7 +225,7 @@ const background: React.CSSProperties = {
   top: 0,
   right: 0,
   bottom: 0,
-  width: "100%",
+  width: "100%"
 };
 
 const toggleContainer: React.CSSProperties = {
@@ -240,7 +240,7 @@ const toggleContainer: React.CSSProperties = {
   width: 50,
   height: 50,
   borderRadius: "50%",
-  background: "transparent",
+  background: "transparent"
 };
 
 const list: React.CSSProperties = {
@@ -249,7 +249,7 @@ const list: React.CSSProperties = {
   margin: 0,
   position: "absolute",
   top: 80,
-  width: "100%",
+  width: "100%"
 };
 
 const listItem: React.CSSProperties = {
@@ -260,7 +260,7 @@ const listItem: React.CSSProperties = {
   margin: 0,
   listStyle: "none",
   marginBottom: 20,
-  cursor: "pointer",
+  cursor: "pointer"
 };
 
 const iconPlaceholder: React.CSSProperties = {
@@ -268,14 +268,14 @@ const iconPlaceholder: React.CSSProperties = {
   height: 40,
   borderRadius: "50%",
   flex: "40px 0",
-  marginRight: 20,
+  marginRight: 20
 };
 
 const textPlaceholder: React.CSSProperties = {
   borderRadius: 5,
   width: 200,
   height: 20,
-  flex: 1,
+  flex: 1
 };
 
 /**

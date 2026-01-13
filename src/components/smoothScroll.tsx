@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
@@ -74,7 +76,7 @@ export default function SmoothScroll({ children }: Props) {
   }, []);
 
   return (
-    <SmoothScrollContext.Provider value={{ y, pause, resume}}>
+    <SmoothScrollContext.Provider value={{ y, pause, resume }}>
       <motion.div
         ref={scrollRef}
         style={{

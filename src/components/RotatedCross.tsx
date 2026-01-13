@@ -1,10 +1,12 @@
+"use client";
+
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 function RotatedCross({
-  classNameOuter,
-  classNameInner,
-}: {
+                        classNameOuter,
+                        classNameInner
+                      }: {
   classNameOuter?: string;
   classNameInner?: string;
 }) {
@@ -29,7 +31,7 @@ function RotatedCross({
         duration: 0.1,
         repeatDelay: repeatDelay,
         repeat: Infinity,
-        ease: "backInOut",
+        ease: "backInOut"
       }}
     >
       <div

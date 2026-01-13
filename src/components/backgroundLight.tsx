@@ -1,13 +1,15 @@
+"use client";
+
 import { motion, useAnimation } from "framer-motion";
 import React, { useEffect, useState } from "react";
 
 function BackgroundLight({
-  positionFormula = (n: number) => n,
-  colorInner,
-  colorMiddle,
-  colorOuter,
-  defaultPosition,
-}: {
+                           positionFormula = (n: number) => n,
+                           colorInner,
+                           colorMiddle,
+                           colorOuter,
+                           defaultPosition
+                         }: {
   colorInner?: string;
   colorMiddle?: string;
   colorOuter?: string;
@@ -18,7 +20,7 @@ function BackgroundLight({
   const [oldMousePositio, setOldMousePosition] = React.useState({ x: 0, y: 0 });
   const [currentMousePosition, setCurrentMousePosition] = useState({
     x: 0,
-    y: 0,
+    y: 0
   });
 
   useEffect(() => {
@@ -34,8 +36,8 @@ function BackgroundLight({
           left: `${positionFormula(currentMousePosition.x)}%`,
           transition: {
             duration: 2,
-            ease: "easeOut",
-          },
+            ease: "easeOut"
+          }
         });
       }
     };
@@ -52,7 +54,7 @@ function BackgroundLight({
   const light: React.CSSProperties = {
     boxShadow: `0 0 60px 30px ${colorInner},0 0 100px 60px ${colorMiddle},0 0 140px 90px ${colorOuter}`,
     top: `${defaultPosition.top}%`,
-    left: `${defaultPosition.left}%`,
+    left: `${defaultPosition.left}%`
   };
 
   return (
@@ -63,7 +65,7 @@ function BackgroundLight({
       onAnimationComplete={() => {
         setOldMousePosition({
           x: currentMousePosition.x,
-          y: currentMousePosition.y,
+          y: currentMousePosition.y
         });
       }}
     />
@@ -73,7 +75,7 @@ function BackgroundLight({
 const outDistance = (
   limit: number,
   oldPosition: { x: number; y: number },
-  currentPosition: { x: number; y: number },
+  currentPosition: { x: number; y: number }
 ) => {
   const distanceX = Math.abs(currentPosition.x - oldPosition.x);
   const distanceY = Math.abs(currentPosition.y - oldPosition.y);

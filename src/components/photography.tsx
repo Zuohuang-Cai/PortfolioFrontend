@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 
@@ -8,7 +10,7 @@ function Photography() {
   const images = [
     "/portrait/hackerStyle.png",
     "/portrait/robotStyle.png",
-    "/portrait/jojoStyle.png",
+    "/portrait/jojoStyle.png"
   ];
 
   const handleMouseLeave = () => {
@@ -30,7 +32,7 @@ function Photography() {
         initial={{ opacity: 1 }}
         animate={{
           opacity: isHovering ? 0.5 : 1,
-          filter: isHovering ? "brightness(60%) blur(2px)" : "brightness(100%)",
+          filter: isHovering ? "brightness(60%) blur(2px)" : "brightness(100%)"
         }}
         transition={{ duration: 0.5 }}
       />
@@ -42,7 +44,7 @@ function Photography() {
         src={images[(currentImageIndex + 1) % images.length]}
         initial={{ clipPath: "inset(0 100% 0 0)" }}
         animate={{
-          clipPath: isHovering ? "inset(0 50% 0 0)" : "inset(0 100% 0 0)",
+          clipPath: isHovering ? "inset(0 50% 0 0)" : "inset(0 100% 0 0)"
         }}
         transition={{ duration: 0.3 }}
       />

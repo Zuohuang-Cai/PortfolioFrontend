@@ -1,8 +1,8 @@
 import Navbar from "@/components/navbar";
 
 export default function DefaultLayout({
-  children,
-}: {
+                                        children
+                                      }: {
   children: React.ReactNode;
 }) {
   return (
@@ -12,3 +12,4 @@ export default function DefaultLayout({
     </div>
   );
 }
+

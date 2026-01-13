@@ -1,11 +1,243 @@
-import { useEffect, useRef, useState } from "react";
-import { useInView, useMotionValue, useSpring } from "framer-motion";
+"use client";
+
+import { useEffect, useRef, useState, ReactNode } from "react";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useSmoothScroll } from "@/context/smoothScrollContext";
 
-function HorizontalScroll() {
+// 技能卡片的接口
+interface SkillCard {
+  title: string;
+  icon: ReactNode;
+  description: string;
+  technologies: string[];
+  color: string;
+}
+
+// 编程相关的技能数据
+const programmingSkills: SkillCard[] = [
+  {
+    title: "Frontend Development",
+    icon: <CodeIcon />,
+    description: "Building beautiful, responsive user interfaces",
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    color: "from-blue-500 to-cyan-400"
+  },
+  {
+    title: "Backend Development",
+    icon: <ServerIcon />,
+    description: "Creating robust and scalable server solutions",
+    technologies: ["Node.js", "Python", "Java", "REST APIs"],
+    color: "from-green-500 to-emerald-400"
+  },
+  {
+    title: "Database Design",
+    icon: <DatabaseIcon />,
+    description: "Designing efficient data structures and queries",
+    technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL"],
+    color: "from-purple-500 to-pink-400"
+  },
+  {
+    title: "DevOps & Cloud",
+    icon: <CloudIcon />,
+    description: "Deploying and managing cloud infrastructure",
+    technologies: ["Docker", "AWS", "CI/CD", "Kubernetes"],
+    color: "from-orange-500 to-yellow-400"
+  },
+  {
+    title: "Mobile Development",
+    icon: <MobileIcon />,
+    description: "Creating cross-platform mobile applications",
+    technologies: ["React Native", "Flutter", "iOS", "Android"],
+    color: "from-red-500 to-rose-400"
+  }
+];
+
+// 动画变体
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2
+    }
+  }
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 100,
+    rotateX: -15
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    rotateX: 0,
+    transition: {
+      type: "spring",
+      damping: 20,
+      stiffness: 100
+    }
+  }
+};
+
+const techBadgeVariants = {
+  hidden: { opacity: 0, scale: 0 },
+  visible: (i: number) => ({
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: i * 0.1,
+      type: "spring",
+      stiffness: 200
+    }
+  })
+};
+
+const floatingCodeVariants = {
+  animate: {
+    y: [0, -10, 0],
+    opacity: [0.3, 0.6, 0.3],
+    transition: {
+      duration: 3,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+};
+
+// 技能卡片组件
+function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number }) {
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, amount: 0.5 });
+
+  return (
+    <motion.div
+      ref={cardRef}
+      className="min-w-[350px] h-[450px] mx-6 perspective-1000"
+      variants={cardVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      whileHover={{
+        scale: 1.05,
+        rotateY: 5,
+        transition: { duration: 0.3 }
+      }}
+    >
+      <div className={`relative h-full w-full rounded-3xl bg-gradient-to-br ${skill.color} p-1`}>
+        <div className="h-full w-full rounded-3xl bg-black/90 backdrop-blur-xl p-8 flex flex-col">
+          {/* 浮动代码背景装饰 */}
+          <motion.div
+            className="absolute top-4 right-4 text-white/10 text-6xl font-mono"
+            variants={floatingCodeVariants}
+            animate="animate"
+          >
+            {"</>"}
+          </motion.div>
+
+          {/* 图标 */}
+          <motion.div
+            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center mb-6`}
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 0.5 }}
+          >
+            {skill.icon}
+          </motion.div>
+
+          {/* 标题 */}
+          <motion.h3
+            className="text-2xl font-bold text-white mb-3"
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ delay: 0.2 }}
+          >
+            {skill.title}
+          </motion.h3>
+
+          {/* 描述 */}
+          <motion.p
+            className="text-gray-400 mb-6 flex-grow"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            {skill.description}
+          </motion.p>
+
+          {/* 技术标签 */}
+          <div className="flex flex-wrap gap-2">
+            {skill.technologies.map((tech, i) => (
+              <motion.span
+                key={tech}
+                className={`px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${skill.color} text-white`}
+                custom={i}
+                variants={techBadgeVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                whileHover={{ scale: 1.1 }}
+              >
+                {tech}
+              </motion.span>
+            ))}
+          </div>
+
+          {/* 底部装饰线 */}
+          <motion.div
+            className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-3xl bg-gradient-to-r ${skill.color}`}
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          />
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+// 打字机效果组件
+function TypewriterText({ text, isInView }: { text: string; isInView: boolean }) {
+  const [displayText, setDisplayText] = useState("");
+
+  useEffect(() => {
+    if (!isInView) {
+      setDisplayText("");
+      return;
+    }
+
+    let index = 0;
+    const interval = setInterval(() => {
+      if (index <= text.length) {
+        setDisplayText(text.slice(0, index));
+        index++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 100);
+
+    return () => clearInterval(interval);
+  }, [isInView, text]);
+
+  return (
+    <span className="font-mono">
+      {displayText}
+      <motion.span
+        animate={{ opacity: [1, 0] }}
+        transition={{ duration: 0.5, repeat: Infinity }}
+      >
+        |
+      </motion.span>
+    </span>
+  );
+}
+
+interface HorizontalScrollProps {
+  skills?: SkillCard[];
+}
+
+function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps) {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(sectionRef, { amount: 0.6 });
+  const isInView = useInView(sectionRef, { amount: 0.3 });
   const { pause, resume } = useSmoothScroll();
   const [progress, setProgress] = useState(0);
   const scrollX = useMotionValue(0);
@@ -22,7 +254,8 @@ function HorizontalScroll() {
 
     const unsubscribe = springScrollX.on("change", (latest) => {
       container.scrollLeft = latest;
-      setProgress(latest / (container.scrollWidth - container.clientWidth) * 100);
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      setProgress(maxScroll > 0 ? (latest / maxScroll) * 100 : 0);
     });
 
     return () => unsubscribe();
@@ -30,16 +263,16 @@ function HorizontalScroll() {
 
   useEffect(() => {
     if (isInView) return;
-    const container = containerRef.current!;
+    const container = containerRef.current;
+    if (!container) return;
 
-    const maxScroll =
-      container.scrollWidth - container.clientWidth;
+    const maxScroll = container.scrollWidth - container.clientWidth;
 
-    if (container.scrollLeft == maxScroll) {
-      container.scrollLeft -= 1;
+    if (container.scrollLeft >= maxScroll) {
+      container.scrollLeft = maxScroll - 1;
     }
-    if (container.scrollLeft == 0) {
-      container.scrollLeft += 1;
+    if (container.scrollLeft <= 0) {
+      container.scrollLeft = 1;
     }
   }, [isInView]);
 
@@ -66,46 +299,171 @@ function HorizontalScroll() {
       pause();
       window.addEventListener("wheel", onWheel, { passive: false });
     }
-    console.log("update");
 
     return () => {
       window.removeEventListener("wheel", onWheel);
       resume();
     };
-  }, [isInView, progress]);
+  }, [isInView, progress, pause, resume, scrollX]);
 
   return (
     <section
       ref={sectionRef}
-      style={{
-        height: "100vh",
-        overflow: "auto",
-        background: "red"
-      }}
+      className="relative min-h-screen overflow-hidden bg-black"
     >
-      <div
-        ref={containerRef}
-        style={{
-          display: "flex",
-          width: "100vw",
-          height: "100%",
-          overflowX: "auto",
-          overflowY: "hidden"
-        }}
-      >
-        <div className={"flex self-center text-center items-center"} style={{ minWidth: "100vw", flexShrink: 0 }}>
-          <h1 className={"text-center text-[100px] w-full"}>Slide 1</h1>
-        </div>
-        <div className={"flex self-center text-center items-center"} style={{ minWidth: "100vw", flexShrink: 0 }}>
-          <h1 className={"text-center text-[100px] w-full"}>Slide 2</h1>
-        </div>
-        <div className={"flex self-center text-center items-center"} style={{ minWidth: "100vw", flexShrink: 0 }}>
-          <h1 className={"text-center text-[100px] w-full"}>Slide 3</h1>
-        </div>
+      {/* 背景装饰 */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-20 left-10 text-6xl text-white/5 font-mono"
+          animate={{ y: [0, 20, 0], rotate: [0, 5, 0] }}
+          transition={{ duration: 5, repeat: Infinity }}
+        >
+          {"{ }"}
+        </motion.div>
+        <motion.div
+          className="absolute bottom-20 right-10 text-6xl text-white/5 font-mono"
+          animate={{ y: [0, -20, 0], rotate: [0, -5, 0] }}
+          transition={{ duration: 4, repeat: Infinity }}
+        >
+          {"[ ]"}
+        </motion.div>
+        <motion.div
+          className="absolute top-1/2 left-1/4 text-4xl text-white/5 font-mono"
+          animate={{ opacity: [0.05, 0.1, 0.05] }}
+          transition={{ duration: 3, repeat: Infinity }}
+        >
+          {"=>"}
+        </motion.div>
       </div>
 
+      {/* 进度条 */}
+      <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-10">
+        <motion.div
+          className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      {/* 滚动提示 */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 text-sm flex items-center gap-2"
+        animate={{ opacity: [0.5, 1, 0.5] }}
+        transition={{ duration: 2, repeat: Infinity }}
+      >
+        <span>← Scroll to explore →</span>
+      </motion.div>
+
+      {/* 卡片容器 */}
+      <div
+        ref={containerRef}
+        className="flex items-center h-screen overflow-x-auto overflow-y-hidden px-20 scrollbar-hide"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+      >
+        {/* 介绍卡片 */}
+        <motion.div
+          className="min-w-[400px] h-[450px] mx-6 flex flex-col justify-center"
+          initial={{ opacity: 0, x: -50 }}
+          animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-5xl font-black text-white mb-4">
+            <TypewriterText text="Skills & Expertise" isInView={isInView} />
+          </h2>
+          <p className="text-xl text-gray-400">
+            Technologies I work with to bring ideas to life
+          </p>
+          <motion.div
+            className="mt-8 flex items-center gap-2 text-white/50"
+            animate={{ x: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <span>Swipe</span>
+            <span>→</span>
+          </motion.div>
+        </motion.div>
+
+        {/* 技能卡片 */}
+        <motion.div
+          className="flex items-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {skills.map((skill, index) => (
+            <SkillCardComponent key={skill.title} skill={skill} index={index} />
+          ))}
+        </motion.div>
+
+        {/* 结束卡片 */}
+        <motion.div
+          className="min-w-[400px] h-[450px] mx-6 flex flex-col justify-center items-center"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.div
+            className="text-6xl mb-4"
+            animate={{ rotate: [0, 10, -10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            🚀
+          </motion.div>
+          <h3 className="text-3xl font-bold text-white mb-2">
+            Always Learning
+          </h3>
+          <p className="text-gray-400 text-center">
+            Constantly exploring new technologies
+          </p>
+        </motion.div>
+      </div>
     </section>
   );
 }
 
+// SVG 图标组件
+function CodeIcon() {
+  return (
+    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+    </svg>
+  );
+}
+
+function ServerIcon() {
+  return (
+    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+    </svg>
+  );
+}
+
+function DatabaseIcon() {
+  return (
+    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />
+    </svg>
+  );
+}
+
+function CloudIcon() {
+  return (
+    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+    </svg>
+  );
+}
+
+function MobileIcon() {
+  return (
+    <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    </svg>
+  );
+}
+
 export default HorizontalScroll;
+export type { SkillCard };

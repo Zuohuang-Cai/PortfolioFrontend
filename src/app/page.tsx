@@ -1,9 +1,11 @@
-import { Link } from "@nextui-org/link";
-import { Snippet } from "@nextui-org/snippet";
-import { Button } from "@nextui-org/button";
-import { Code } from "@nextui-org/code";
-import { button as buttonStyles } from "@nextui-org/theme";
-import { Image } from "@nextui-org/image";
+"use client";
+
+import { Link } from "@heroui/link";
+import { Snippet } from "@heroui/snippet";
+import { Button } from "@heroui/button";
+import { Code } from "@heroui/code";
+import { button as buttonStyles } from "@heroui/theme";
+import { Image } from "@heroui/image";
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
@@ -14,19 +16,16 @@ import { GmailLogo } from "@/components/icons";
 import Cv from "@/components/cv";
 import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives";
-import DefaultLayout from "@/layouts/default";
-import BackgroundLight from "@/components/backgroundLight.tsx";
-
-import "@devnomic/marquee/dist/index.css";
-import RotatedCross from "@/components/RotatedCross.tsx";
-import LightLine from "@/components/LightLine.tsx";
+import DefaultLayout from "@/components/layouts/default";
+import BackgroundLight from "@/components/backgroundLight";
+import RotatedCross from "@/components/RotatedCross";
+import LightLine from "@/components/LightLine";
 import { Slippery } from "@/components/icons";
-import Photography from "@/components/photography.tsx";
-import SmoothScroll from "@/components/smoothScroll.tsx";
-import Quations from "@/components/svgs/quations.tsx";
-import HorizontalScroll from "@/components/horizontalScroll.tsx";
+import Photography from "@/components/photography";
+import SmoothScroll from "@/components/smoothScroll";
+import HorizontalScroll from "@/components/horizontalScroll";
 
-export default function IndexPage() {
+export default function Home() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
 
   return (
@@ -52,7 +51,6 @@ export default function IndexPage() {
             colorMiddle={"hsl(282, 51%, 50%)"}
             colorOuter={"rgb(252, 0, 0)"}
             defaultPosition={{ top: 0, left: 0 }}
-            // positionFormula={(n) => n * -1 + 100}
           />
 
           <div
@@ -113,7 +111,7 @@ export default function IndexPage() {
                 <Button
                   className={"max-w-40 my-2"}
                   color="primary"
-                  endContent={Cv()}
+                  endContent={<Cv />}
                 >
                   Download CV
                 </Button>
@@ -135,7 +133,7 @@ export default function IndexPage() {
                   "h-[500px] w-[400px] table:w-[300px] table:h-[400px]"
                 }
                 isZoomed={true}
-                src="../../public/AiAvatar.png"
+                src="/AiAvatar.png"
               />
             </motion.div>
           </div>
@@ -175,17 +173,9 @@ export default function IndexPage() {
           </div>
         </div>
 
-        <div className={"h-[100vh] mt-28 flex flex-col"}>
-          <div className={"flex flex-col"}>
-            <h1 className={"text-7xl font-black"}>what skills</h1>
-            <div className={"flex justify-start"}>
-              <h1 className={"text-7xl font-black"}>can i have</h1>
-              <Quations />
-            </div>
-          </div>
-          <div className={"flex bg-amber-100 w-full h-full"}>
-            <HorizontalScroll />
-          </div>
+        {/* Skills Section */}
+        <div className={"min-h-[100vh] flex flex-col bg-black"}>
+          <HorizontalScroll />
         </div>
 
         <div className={"h-[100vh] w-full bg-pink-200"}></div>
@@ -223,18 +213,17 @@ export default function IndexPage() {
               GitHub
             </Link>
           </div>
-          ;
           <div className="mt-8">
             <Snippet hideCopyButton hideSymbol variant="bordered">
               <span>
                 Get started by editing{" "}
-                <Code color="primary">pages/index.tsx</Code>
+                <Code color="primary">app/page.tsx</Code>
               </span>
             </Snippet>
           </div>
-          ;
         </section>
       </SmoothScroll>
     </DefaultLayout>
   );
 }
+

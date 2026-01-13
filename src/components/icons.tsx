@@ -1,13 +1,15 @@
+"use client";
+
 import * as React from "react";
 import { motion } from "framer-motion";
 
 import { IconSvgProps } from "@/types";
 
 export const Logo: React.FC<IconSvgProps> = ({
-  size = 36,
-  height,
-  ...props
-}) => (
+                                               size = 36,
+                                               height,
+                                               ...props
+                                             }) => (
   <svg
     fill="none"
     height={size || height}
@@ -25,11 +27,11 @@ export const Logo: React.FC<IconSvgProps> = ({
 );
 
 export const DiscordIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+                                                      size = 24,
+                                                      width,
+                                                      height,
+                                                      ...props
+                                                    }) => {
   return (
     <svg
       height={size || height}
@@ -46,11 +48,11 @@ export const DiscordIcon: React.FC<IconSvgProps> = ({
 };
 
 export const TwitterIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+                                                      size = 24,
+                                                      width,
+                                                      height,
+                                                      ...props
+                                                    }) => {
   return (
     <svg
       height={size || height}
@@ -67,11 +69,11 @@ export const TwitterIcon: React.FC<IconSvgProps> = ({
 };
 
 export const LinkedinIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+                                                       size = 24,
+                                                       width,
+                                                       height,
+                                                       ...props
+                                                     }) => {
   return (
     <svg
       height={size || height}
@@ -83,12 +85,13 @@ export const LinkedinIcon: React.FC<IconSvgProps> = ({
       {...props}
       fill={"white"}
     >
-      <path d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
+      <path
+        d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M17,20v19h-6V20H17z M11,14.47c0-1.4,1.2-2.47,3-2.47s2.93,1.07,3,2.47c0,1.4-1.12,2.53-3,2.53C12.2,17,11,15.87,11,14.47z M39,39h-6c0,0,0-9.26,0-10 c0-2-1-4-3.5-4.04h-0.08C27,24.96,26,27.02,26,29c0,0.91,0,10,0,10h-6V20h6v2.56c0,0,1.93-2.56,5.81-2.56 c3.97,0,7.19,2.73,7.19,8.26V39z" />
     </svg>
   );
 };
 
-export const Slippery: any = ({ size = 24, width, height, ...props }) => {
+export const Slippery: any = ({ size = 24, width = 24, height = 24, ...props }) => {
   return (
     <motion.svg
       fill={"white"}
@@ -97,14 +100,14 @@ export const Slippery: any = ({ size = 24, width, height, ...props }) => {
       width={size || width}
       {...props}
       animate={{
-        rotateZ: [0, 180, 180, 360],
+        rotateZ: [0, 180, 180, 360]
       }}
       transition={{
         duration: 4,
         times: [0, 0.1, 0.9, 1],
         repeatDelay: 3,
         repeat: Infinity,
-        ease: "linear",
+        ease: "linear"
       }}
     >
       <polygon
@@ -119,14 +122,14 @@ export const Slippery: any = ({ size = 24, width, height, ...props }) => {
       />
       <motion.g
         animate={{
-          rotateZ: [0, 180, 180, 0],
+          rotateZ: [0, 180, 180, 0]
         }}
         className="hws_brand_arrow h-[5px] w-[5px] fill-red-600"
         transition={{
           duration: 2,
           repeatDelay: 5,
           repeat: Infinity,
-          ease: "linear",
+          ease: "linear"
         }}
       >
         <path d="M314.2,494.9c0,0,5.3-59.9-28.6-115.1c-35.1-57.4-86.6-65.3-86.6-65.3" />
@@ -137,11 +140,11 @@ export const Slippery: any = ({ size = 24, width, height, ...props }) => {
 };
 
 export const GithubIcon: React.FC<IconSvgProps> = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}) => {
+                                                     size = 24,
+                                                     width,
+                                                     height,
+                                                     ...props
+                                                   }) => {
   return (
     <svg
       fill={"white"}
@@ -161,11 +164,11 @@ export const GithubIcon: React.FC<IconSvgProps> = ({
 };
 
 export const MoonFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+                                 size = 24,
+                                 width,
+                                 height,
+                                 ...props
+                               }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -183,11 +186,11 @@ export const MoonFilledIcon = ({
 );
 
 export const SunFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+                                size = 24,
+                                width,
+                                height,
+                                ...props
+                              }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -199,17 +202,18 @@ export const SunFilledIcon = ({
   >
     <g fill="currentColor">
       <path d="M19 12a7 7 0 11-7-7 7 7 0 017 7z" />
-      <path d="M12 22.96a.969.969 0 01-1-.96v-.08a1 1 0 012 0 1.038 1.038 0 01-1 1.04zm7.14-2.82a1.024 1.024 0 01-.71-.29l-.13-.13a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.984.984 0 01-.7.29zm-14.28 0a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a1 1 0 01-.7.29zM22 13h-.08a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zM2.08 13H2a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zm16.93-7.01a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a.984.984 0 01-.7.29zm-14.02 0a1.024 1.024 0 01-.71-.29l-.13-.14a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.97.97 0 01-.7.3zM12 3.04a.969.969 0 01-1-.96V2a1 1 0 012 0 1.038 1.038 0 01-1 1.04z" />
+      <path
+        d="M12 22.96a.969.969 0 01-1-.96v-.08a1 1 0 012 0 1.038 1.038 0 01-1 1.04zm7.14-2.82a1.024 1.024 0 01-.71-.29l-.13-.13a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.984.984 0 01-.7.29zm-14.28 0a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a1 1 0 01-.7.29zM22 13h-.08a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zM2.08 13H2a1 1 0 010-2 1.038 1.038 0 011.04 1 .969.969 0 01-.96 1zm16.93-7.01a1.024 1.024 0 01-.71-.29 1 1 0 010-1.41l.13-.13a1 1 0 011.41 1.41l-.13.13a.984.984 0 01-.7.29zm-14.02 0a1.024 1.024 0 01-.71-.29l-.13-.14a1 1 0 011.41-1.41l.13.13a1 1 0 010 1.41.97.97 0 01-.7.3zM12 3.04a.969.969 0 01-1-.96V2a1 1 0 012 0 1.038 1.038 0 01-1 1.04z" />
     </g>
   </svg>
 );
 
 export const HeartFilledIcon = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => (
+                                  size = 24,
+                                  width,
+                                  height,
+                                  ...props
+                                }: IconSvgProps) => (
   <svg
     aria-hidden="true"
     focusable="false"
@@ -258,11 +262,11 @@ export const SearchIcon = (props: IconSvgProps) => (
 );
 
 export const GmailLogo = ({
-  size = 24,
-  width,
-  height,
-  ...props
-}: IconSvgProps) => {
+                            size = 24,
+                            width,
+                            height,
+                            ...props
+                          }: IconSvgProps) => {
   return (
     <svg
       fill={"white"}
@@ -274,7 +278,8 @@ export const GmailLogo = ({
       y="0px"
       {...props}
     >
-      <path d="M 5.5 7 C 3.019531 7 1 9.019531 1 11.5 L 1 11.925781 L 25 29 L 49 11.925781 L 49 11.5 C 49 9.019531 46.980469 7 44.5 7 Z M 6.351563 9 L 43.644531 9 L 25 22 Z M 1 14.027344 L 1 38.5 C 1 40.980469 3.019531 43 5.5 43 L 44.5 43 C 46.980469 43 49 40.980469 49 38.5 L 49 14.027344 L 43 18.296875 L 43 41 L 7 41 L 7 18.296875 Z" />
+      <path
+        d="M 5.5 7 C 3.019531 7 1 9.019531 1 11.5 L 1 11.925781 L 25 29 L 49 11.925781 L 49 11.5 C 49 9.019531 46.980469 7 44.5 7 Z M 6.351563 9 L 43.644531 9 L 25 22 Z M 1 14.027344 L 1 38.5 C 1 40.980469 3.019531 43 5.5 43 L 44.5 43 C 46.980469 43 49 40.980469 49 38.5 L 49 14.027344 L 43 18.296875 L 43 41 L 7 41 L 7 18.296875 Z" />
     </svg>
   );
 };
