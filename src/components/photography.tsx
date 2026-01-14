@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 function Photography() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -11,16 +11,23 @@ function Photography() {
     offset: ["start end", "end start"]
   });
 
+  const springConfig = {
+    damping: 20,
+    stiffness: 100
+  };
+
+  const smoothProgress = useSpring(scrollYProgress, springConfig);
+
   const clipPath = useTransform(
-    scrollYProgress,
+    smoothProgress,
     [0.2, 0.8],
-    ["inset(100% 0 0 0)", "inset(0% 0 0 0)"]
+    ["inset(0 0 100% 0)", "inset(0 0 0% 0)"]
   );
 
-  const scale1 = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.95]);
-  const opacity1 = useTransform(scrollYProgress, [0.2, 0.8], [1, 0.5]);
+  const scale1 = useTransform(smoothProgress, [0.2, 0.8], [1, 0.95]);
+  const opacity1 = useTransform(smoothProgress, [0.2, 0.8], [1, 0.5]);
 
-  const linePosition = useTransform(scrollYProgress, [0.2, 0.8], ["100%", "0%"]);
+  const linePosition = useTransform(smoothProgress, [0.2, 0.8], ["0%", "100%"]);
 
   return (
     <div
