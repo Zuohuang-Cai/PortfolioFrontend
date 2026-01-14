@@ -14,8 +14,6 @@ import { GithubIcon } from "@/components/icons";
 import { LinkedinIcon } from "@/components/icons";
 import { GmailLogo } from "@/components/icons";
 import Cv from "@/components/cv";
-import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
 import DefaultLayout from "@/components/layouts/default";
 import BackgroundLight from "@/components/backgroundLight";
 import RotatedCross from "@/components/RotatedCross";
@@ -24,6 +22,7 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography";
 import SmoothScroll from "@/components/smoothScroll";
 import HorizontalScroll from "@/components/horizontalScroll";
+import Quations from "@/components/svgs/quations";
 
 export default function Home() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -157,7 +156,7 @@ export default function Home() {
             <h1>PORTRAIT</h1>
             <RotatedCross classNameInner={"w-[7px] h-[35px]"} />
           </div>
-          <div className={"w-[70%] bg-black rounded-[10%] z-10"}>
+          <div className={"w-[70%] bg-black z-10"}>
             <Photography />
           </div>
           <div
@@ -178,50 +177,10 @@ export default function Home() {
           <HorizontalScroll />
         </div>
 
-        <div className={"h-[100vh] w-full bg-pink-200"}></div>
-
-        <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
-          <div className="inline-block max-w-lg text-center justify-center">
-            <span className={title()}> Make&nbsp;</span>
-            <span className={title({ color: "violet" })}>beautiful&nbsp;</span>
-            <br />
-            <span className={title()}>
-              websites regardless of your design experience.
-            </span>
-            <div className={subtitle({ class: "mt-4" })}>
-              Beautiful, fast and modern React UI library.
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Link
-              isExternal
-              className={buttonStyles({
-                color: "primary",
-                radius: "full",
-                variant: "shadow"
-              })}
-              href={siteConfig.links.docs}
-            >
-              Documentation
-            </Link>
-            <Link
-              isExternal
-              className={buttonStyles({ variant: "bordered", radius: "full" })}
-              href={siteConfig.links.github}
-            >
-              <GithubIcon size={20} />
-              GitHub
-            </Link>
-          </div>
-          <div className="mt-8">
-            <Snippet hideCopyButton hideSymbol variant="bordered">
-              <span>
-                Get started by editing{" "}
-                <Code color="primary">app/page.tsx</Code>
-              </span>
-            </Snippet>
-          </div>
-        </section>
+        <div
+          className={"h-[100vh] w-full bg-gradient-to-b from-black to-gray-900 flex flex-col items-center justify-center"}>
+          <Quations />
+        </div>
       </SmoothScroll>
     </DefaultLayout>
   );

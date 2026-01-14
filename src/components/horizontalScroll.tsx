@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useSmoothScroll } from "@/context/smoothScrollContext";
 
-// 技能卡片的接口
 interface SkillCard {
   title: string;
   icon: ReactNode;
@@ -13,41 +12,40 @@ interface SkillCard {
   color: string;
 }
 
-// 编程相关的技能数据
 const programmingSkills: SkillCard[] = [
   {
     title: "Frontend Development",
     icon: <CodeIcon />,
     description: "Building beautiful, responsive user interfaces",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap"],
     color: "from-blue-500 to-cyan-400"
   },
   {
     title: "Backend Development",
     icon: <ServerIcon />,
     description: "Creating robust and scalable server solutions",
-    technologies: ["Node.js", "Python", "Java", "REST APIs"],
+    technologies: ["Node.js", "C#", "Java", ".Net", "Springboot", "Express.js"],
     color: "from-green-500 to-emerald-400"
   },
   {
     title: "Database Design",
     icon: <DatabaseIcon />,
     description: "Designing efficient data structures and queries",
-    technologies: ["PostgreSQL", "MongoDB", "Redis", "MySQL"],
+    technologies: ["PostgreSQL", "Redis", "MySQL"],
     color: "from-purple-500 to-pink-400"
   },
   {
     title: "DevOps & Cloud",
     icon: <CloudIcon />,
     description: "Deploying and managing cloud infrastructure",
-    technologies: ["Docker", "AWS", "CI/CD", "Kubernetes"],
+    technologies: ["Docker", "Azure", "CI/CD"],
     color: "from-orange-500 to-yellow-400"
   },
   {
     title: "Mobile Development",
     icon: <MobileIcon />,
     description: "Creating cross-platform mobile applications",
-    technologies: ["React Native", "Flutter", "iOS", "Android"],
+    technologies: ["React Native"],
     color: "from-red-500 to-rose-400"
   }
 ];
@@ -106,7 +104,6 @@ const floatingCodeVariants = {
   }
 };
 
-// 技能卡片组件
 function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number }) {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: false, amount: 0.5 });
@@ -126,7 +123,6 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
     >
       <div className={`relative h-full w-full rounded-3xl bg-gradient-to-br ${skill.color} p-1`}>
         <div className="h-full w-full rounded-3xl bg-black/90 backdrop-blur-xl p-8 flex flex-col">
-          {/* 浮动代码背景装饰 */}
           <motion.div
             className="absolute top-4 right-4 text-white/10 text-6xl font-mono"
             variants={floatingCodeVariants}
@@ -135,7 +131,6 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
             {"</>"}
           </motion.div>
 
-          {/* 图标 */}
           <motion.div
             className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center mb-6`}
             whileHover={{ rotate: 360 }}
@@ -144,7 +139,6 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
             {skill.icon}
           </motion.div>
 
-          {/* 标题 */}
           <motion.h3
             className="text-2xl font-bold text-white mb-3"
             initial={{ opacity: 0, x: -20 }}
@@ -154,7 +148,6 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
             {skill.title}
           </motion.h3>
 
-          {/* 描述 */}
           <motion.p
             className="text-gray-400 mb-6 flex-grow"
             initial={{ opacity: 0 }}
@@ -164,7 +157,6 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
             {skill.description}
           </motion.p>
 
-          {/* 技术标签 */}
           <div className="flex flex-wrap gap-2">
             {skill.technologies.map((tech, i) => (
               <motion.span
@@ -181,9 +173,8 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
             ))}
           </div>
 
-          {/* 底部装饰线 */}
           <motion.div
-            className={`absolute bottom-0 left-0 right-0 h-1 rounded-b-3xl bg-gradient-to-r ${skill.color}`}
+            className={`absolute bottom-1 left-0 right-0 h-1 rounded-b-3xl rounded-t-3xl bg-gradient-to-r ${skill.color}`}
             initial={{ scaleX: 0 }}
             animate={isInView ? { scaleX: 1 } : { scaleX: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
@@ -237,16 +228,36 @@ interface HorizontalScrollProps {
 function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps) {
   const sectionRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const isInView = useInView(sectionRef, { amount: 0.3 });
+  const isInView = useInView(sectionRef, { amount: 0.5 });
   const { pause, resume } = useSmoothScroll();
   const [progress, setProgress] = useState(0);
+  const [isActive, setIsActive] = useState(false);
   const scrollX = useMotionValue(0);
+  const lastScrollDirection = useRef<"up" | "down" | null>(null);
+  const wasInView = useRef(false);
 
   const springScrollX = useSpring(scrollX, {
-    damping: 20,
-    stiffness: 100,
-    mass: 1
+    damping: 25,
+    stiffness: 120,
+    mass: 0.5
   });
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        lastScrollDirection.current = "down";
+      } else if (currentScrollY < lastScrollY) {
+        lastScrollDirection.current = "up";
+      }
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -262,56 +273,81 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
   }, [springScrollX]);
 
   useEffect(() => {
-    if (isInView) return;
     const container = containerRef.current;
-    if (!container) return;
-
-    const maxScroll = container.scrollWidth - container.clientWidth;
-
-    if (container.scrollLeft >= maxScroll) {
-      container.scrollLeft = maxScroll - 1;
-    }
-    if (container.scrollLeft <= 0) {
-      container.scrollLeft = 1;
-    }
-  }, [isInView]);
-
-  useEffect(() => {
-    if (!isInView) return;
-
-    const container = containerRef.current;
-    if (!container) return;
+    const section = sectionRef.current;
+    if (!container || !section) return;
 
     const maxScroll = container.scrollWidth - container.clientWidth;
 
     const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
+      const currentX = scrollX.get();
+      const isScrollingDown = e.deltaY > 0;
+      const isScrollingUp = e.deltaY < 0;
 
-      let newX = scrollX.get() + e.deltaY;
+      const atStart = currentX <= 1;
+      const atEnd = currentX >= maxScroll - 1;
+
+      if (atStart && isScrollingUp) {
+        setIsActive(false);
+        resume();
+        return;
+      }
+
+      if (atEnd && isScrollingDown) {
+        setIsActive(false);
+        resume();
+        return;
+      }
+
+      e.preventDefault();
+      e.stopPropagation();
+
+      let newX = currentX + e.deltaY;
       newX = Math.max(0, Math.min(newX, maxScroll));
       scrollX.set(newX);
     };
 
-    const shouldCapture =
-      container.scrollLeft < maxScroll && container.scrollLeft > 0;
+    const justEnteredView = isInView && !wasInView.current;
+    wasInView.current = isInView;
 
-    if (shouldCapture) {
-      pause();
-      window.addEventListener("wheel", onWheel, { passive: false });
+    if (justEnteredView) {
+      const direction = lastScrollDirection.current;
+
+      if (direction === "up") {
+        scrollX.set(maxScroll);
+        setIsActive(true);
+        pause();
+      } else if (direction === "down") {
+        scrollX.set(0);
+        setIsActive(true);
+        pause();
+      }
     }
 
+    if (!isInView && isActive) {
+      setIsActive(false);
+      resume();
+    }
+
+    if (isActive) {
+      window.addEventListener("wheel", onWheel, { passive: false });
+      return () => {
+        window.removeEventListener("wheel", onWheel);
+      };
+    }
+  }, [isInView, isActive, pause, resume, scrollX]);
+
+  useEffect(() => {
     return () => {
-      window.removeEventListener("wheel", onWheel);
       resume();
     };
-  }, [isInView, progress, pause, resume, scrollX]);
+  }, [resume]);
 
   return (
     <section
       ref={sectionRef}
       className="relative min-h-screen overflow-hidden bg-black"
     >
-      {/* 背景装饰 */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div
           className="absolute top-20 left-10 text-6xl text-white/5 font-mono"
@@ -336,7 +372,6 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
         </motion.div>
       </div>
 
-      {/* 进度条 */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-white/10 z-10">
         <motion.div
           className="h-full bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
@@ -344,7 +379,6 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
         />
       </div>
 
-      {/* 滚动提示 */}
       <motion.div
         className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 text-sm flex items-center gap-2"
         animate={{ opacity: [0.5, 1, 0.5] }}
@@ -353,13 +387,11 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
         <span>← Scroll to explore →</span>
       </motion.div>
 
-      {/* 卡片容器 */}
       <div
         ref={containerRef}
         className="flex items-center h-screen overflow-x-auto overflow-y-hidden px-20 scrollbar-hide"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {/* 介绍卡片 */}
         <motion.div
           className="min-w-[400px] h-[450px] mx-6 flex flex-col justify-center"
           initial={{ opacity: 0, x: -50 }}
@@ -382,7 +414,6 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
           </motion.div>
         </motion.div>
 
-        {/* 技能卡片 */}
         <motion.div
           className="flex items-center"
           variants={containerVariants}
@@ -394,7 +425,6 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
           ))}
         </motion.div>
 
-        {/* 结束卡片 */}
         <motion.div
           className="min-w-[400px] h-[450px] mx-6 flex flex-col justify-center items-center"
           initial={{ opacity: 0 }}
@@ -420,7 +450,6 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
   );
 }
 
-// SVG 图标组件
 function CodeIcon() {
   return (
     <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
