@@ -27,7 +27,7 @@ const Quations = () => {
     transition: {
       duration: 3,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   };
 
@@ -36,7 +36,7 @@ const Quations = () => {
     transition: {
       duration: 2,
       repeat: Infinity,
-      ease: "easeInOut"
+      ease: "easeInOut" as const
     }
   };
 
@@ -104,7 +104,7 @@ const Quations = () => {
             stroke="url(#questionGradient)"
             strokeDasharray="400"
             strokeWidth="2"
-            transition={{ duration: 1, ease: "easeInOut" }}
+            transition={{ duration: 1, ease: "easeInOut" as const }}
           />
 
           <MotionPath
@@ -117,7 +117,7 @@ const Quations = () => {
             transition={{
               duration: 0.5,
               repeat: isHovered ? Infinity : 0,
-              ease: "easeInOut"
+              ease: "easeInOut" as const
             }}
           />
 
@@ -191,7 +191,7 @@ const Quations = () => {
                 duration: 1,
                 delay: i * 0.1,
                 repeat: Infinity,
-                ease: "easeOut"
+                ease: "easeOut" as const
               }}
             />
           ))}

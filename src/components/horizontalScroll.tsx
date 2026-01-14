@@ -72,49 +72,26 @@ const cardVariants = {
     y: 0,
     rotateX: 0,
     transition: {
-      type: "spring",
+      type: "spring" as const,
       damping: 20,
       stiffness: 100
     }
   }
 };
 
-const techBadgeVariants = {
-  hidden: { opacity: 0, scale: 0 },
-  visible: (i: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delay: i * 0.1,
-      type: "spring",
-      stiffness: 200
-    }
-  })
-};
-
-const floatingCodeVariants = {
-  animate: {
-    y: [0, -10, 0],
-    opacity: [0.3, 0.6, 0.3],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  }
-};
-
-function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number }) {
+function SkillCardComponent({ skill }: { skill: SkillCard }) {
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: false, amount: 0.5 });
+
+  const currentVariant = isInView ? "visible" : "hidden";
 
   return (
     <motion.div
       ref={cardRef}
       className="min-w-[350px] h-[450px] mx-6 perspective-1000"
-      variants={cardVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={currentVariant}
+      variants={cardVariants}
       whileHover={{
         scale: 1.05,
         rotateY: 5,
@@ -125,8 +102,15 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
         <div className="h-full w-full rounded-3xl bg-black/90 backdrop-blur-xl p-8 flex flex-col">
           <motion.div
             className="absolute top-4 right-4 text-white/10 text-6xl font-mono"
-            variants={floatingCodeVariants}
-            animate="animate"
+            animate={{
+              y: [0, -10, 0],
+              opacity: [0.3, 0.6, 0.3],
+              transition: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
           >
             {"</>"}
           </motion.div>
@@ -162,10 +146,16 @@ function SkillCardComponent({ skill, index }: { skill: SkillCard; index: number 
               <motion.span
                 key={tech}
                 className={`px-3 py-1 rounded-full text-sm font-medium bg-gradient-to-r ${skill.color} text-white`}
-                custom={i}
-                variants={techBadgeVariants}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={isInView ? {
+                  opacity: 1,
+                  scale: 1,
+                  transition: {
+                    delay: i * 0.1,
+                    type: "spring" as const,
+                    stiffness: 200
+                  }
+                } : { opacity: 0, scale: 0 }}
                 whileHover={{ scale: 1.1 }}
               >
                 {tech}
@@ -420,8 +410,8 @@ function HorizontalScroll({ skills = programmingSkills }: HorizontalScrollProps)
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
         >
-          {skills.map((skill, index) => (
-            <SkillCardComponent key={skill.title} skill={skill} index={index} />
+          {skills.map((skill) => (
+            <SkillCardComponent key={skill.title} skill={skill} />
           ))}
         </motion.div>
 
