@@ -9,3 +9,9 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+/* Arrow animation transform origin */
+.hws_brand_arrow {
+    transform-origin: 250px 420px;
+}
+
