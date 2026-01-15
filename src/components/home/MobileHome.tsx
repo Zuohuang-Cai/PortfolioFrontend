@@ -18,6 +18,9 @@ import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography";
 import Quations from "@/components/svgs/quations";
 import MobileSkills from "@/components/home/MobileSkills";
+import Projects from "@/components/projects";
+import ContactForm from "@/components/contactForm";
+import Footer from "@/components/footer";
 
 export default function MobileHome() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -25,7 +28,6 @@ export default function MobileHome() {
   return (
     <DefaultLayout>
       <div className="flex flex-col min-h-screen relative overflow-x-hidden">
-        {/* Hero Section */}
         <div className="min-h-screen relative flex flex-col justify-center px-6 py-12 items-center">
           <div className="h-full w-full overflow-hidden absolute inset-0">
             <LightLine left={5} rotate={"rotate-[115deg]"} top={200} />
@@ -38,7 +40,6 @@ export default function MobileHome() {
             defaultPosition={{ top: 50, left: 50 }}
           />
 
-          {/* Avatar */}
           <motion.div
             animate={{ y: 0, opacity: 1 }}
             className="z-10 flex justify-center mb-8"
@@ -53,7 +54,6 @@ export default function MobileHome() {
             />
           </motion.div>
 
-          {/* Text Content */}
           <div className="z-10 text-center">
             <h1 className="font-bold text-2xl my-1">Hello, it&#39;s me</h1>
             <h1 className="font-bold text-3xl my-1">Call me Zuohuang</h1>
@@ -79,7 +79,6 @@ export default function MobileHome() {
               Explore freely—everything you need to know about me is right here!
             </p>
 
-            {/* Social Links */}
             <div className="flex justify-center my-4 gap-4">
               <Link href="https://github.com/Zuohuang-Cai">
                 <GithubIcon />
@@ -128,19 +127,22 @@ export default function MobileHome() {
           </div>
         </div>
 
-        {/* Portrait Section */}
         <div className="h-screen w-full bg-black">
           <Photography />
         </div>
 
-        {/* Skills Section */}
         <MobileSkills />
 
-        {/* Quations Section */}
         <div
           className="min-h-screen w-full bg-gradient-to-b from-black to-gray-900 flex flex-col items-center justify-center py-12">
           <Quations />
         </div>
+
+        <Projects />
+
+        <ContactForm />
+
+        <Footer />
       </div>
     </DefaultLayout>
   );

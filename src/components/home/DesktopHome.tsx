@@ -20,6 +20,9 @@ import Photography from "@/components/photography";
 import SmoothScroll from "@/components/smoothScroll";
 import HorizontalScroll from "@/components/horizontalScroll";
 import Quations from "@/components/svgs/quations";
+import Projects from "@/components/projects";
+import ContactForm from "@/components/contactForm";
+import Footer from "@/components/footer";
 
 export default function DesktopHome() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -68,12 +71,16 @@ export default function DesktopHome() {
                       sequence={[
                         "Full Stack Developer",
                         800,
+                        "",
                         () => setTextColor("text-pink-700"),
                         "Database Designer",
                         1000,
+                        "",
                         () => setTextColor("text-indigo-500"),
                         "League of Legends Player",
-                        100
+                        100,
+                        "",
+                        () => setTextColor("text-fuchsia-600")
                       ]}
                     />
                   </span>
@@ -151,7 +158,7 @@ export default function DesktopHome() {
             </motion.div>
           </div>
 
-          <div className={"h-[20vh] w-full justify-items-center self-end"}>
+          <div className={"h-[20vh] w-full justify-items-center self-end mb-4"}>
             <Slippery className={"w-[100px] h-[100px]"} />
             <p className={"text-red-600 font-bold text-center"}>
               - Scroll carefully, it&#39;s smooth -{" "}
@@ -186,7 +193,6 @@ export default function DesktopHome() {
           </div>
         </div>
 
-        {/* Skills Section */}
         <div className={"h-screen w-full"}>
           <HorizontalScroll />
         </div>
@@ -195,6 +201,12 @@ export default function DesktopHome() {
           className={"h-[100vh] w-full bg-gradient-to-b from-black to-gray-900 flex flex-col items-center justify-center"}>
           <Quations />
         </div>
+
+        <Projects />
+
+        <ContactForm />
+
+        <Footer />
       </SmoothScroll>
     </DefaultLayout>
   );

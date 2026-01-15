@@ -111,7 +111,7 @@ const MenuItem = ({ i }: { i: number }) => {
     <motion.li
       style={listItem}
       variants={itemVariants}
-      whileHover={{ scale: 1.1 }}
+      whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.95 }}
     >
       <div style={{ ...iconPlaceholder, border }} />

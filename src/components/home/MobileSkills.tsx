@@ -187,7 +187,6 @@ export default function MobileSkills() {
       ref={containerRef}
       className="min-h-screen w-full bg-gradient-to-b from-black via-gray-900 to-black py-12"
     >
-      {/* 标题 */}
       <motion.div
         className="text-center mb-8 px-4"
         initial={{ opacity: 0, y: -20 }}
@@ -200,7 +199,6 @@ export default function MobileSkills() {
         </h2>
         <p className="text-gray-400 text-sm mt-2">Swipe through my expertise</p>
 
-        {/* 装饰线 */}
         <motion.div
           className="h-1 w-20 mx-auto mt-4 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500"
           animate={{
@@ -214,15 +212,12 @@ export default function MobileSkills() {
           }}
         />
       </motion.div>
-
-      {/* 技能卡片列表 */}
       <div className="space-y-4">
         {skills.map((skill, index) => (
           <SkillCardItem key={skill.title} skill={skill} index={index} />
         ))}
       </div>
 
-      {/* 底部装饰 */}
       <motion.div
         className="text-center mt-8"
         initial={{ opacity: 0 }}
