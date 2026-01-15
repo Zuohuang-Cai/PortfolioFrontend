@@ -4,12 +4,19 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { Button } from "@heroui/button";
 import { Input, Textarea } from "@heroui/input";
+import emailjs from "@emailjs/browser";
+
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!;
+const SEND_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_SEND_TEMPLATE_ID!;
+const NOTIFICATION_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_NOTIFICATION_TEMPLATE_ID!;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!;
 
 export default function ContactForm() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.3 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -20,16 +27,49 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError(null);
 
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        SEND_TEMPLATE_ID,
+        {
+          to_name: formData.name,
+          to_email: formData.email,
+          email: formData.email,
+          reply_to: formData.email,
+          from_name: "Zuohuang Cai",
+          subject: formData.subject,
+          message: formData.message
+        },
+        PUBLIC_KEY
+      );
 
-    setIsSubmitting(false);
-    setSubmitted(true);
+      await emailjs.send(
+        SERVICE_ID,
+        NOTIFICATION_TEMPLATE_ID,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_name: "Zuohuang Cai"
+        },
+        PUBLIC_KEY
+      );
 
-    setTimeout(() => {
-      setSubmitted(false);
+      setSubmitted(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 3000);
+
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 3000);
+    } catch (err) {
+      console.error("EmailJS Error:", err);
+      setError("Failed to send message. Please try again or email me directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -132,7 +172,7 @@ export default function ContactForm() {
                 </div>
                 <div>
                   <p className="text-gray-500 text-sm">Location</p>
-                  <p className="text-white">Purmerend</p>
+                  <p className="text-white">North Holland</p>
                 </div>
               </motion.div>
             </div>
@@ -172,6 +212,15 @@ export default function ContactForm() {
                   </motion.div>
                 ) : (
                   <div className="space-y-5">
+                    {error && (
+                      <motion.div
+                        className="p-4 bg-red-500/20 border border-red-500/50 rounded-xl text-red-400 text-sm"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                      >
+                        {error}
+                      </motion.div>
+                    )}
                     <motion.div
                       {...getInputAnimation(0)}
                     >

@@ -1,50 +1,62 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, ReactNode } from "react";
 import { Link } from "@heroui/link";
 
 interface Project {
   title: string;
-  description: string;
-  image: string;
+  description: string | ReactNode;
+  image?: string;
   tags: string[];
   github?: string;
   demo?: string;
   featured?: boolean;
 }
 
+const ProjectDescLink = ({ href, children }: { href: string; children: ReactNode }) => (
+  <Link
+    href={href}
+    target="_blank"
+    className="text-purple-400 hover:text-pink-400 underline decoration-purple-400/50 hover:decoration-pink-400 underline-offset-2 transition-all duration-200 font-medium"
+  >
+    {children}
+  </Link>
+);
+
 const projects: Project[] = [
   {
     title: "Portfolio Website",
     description: "A modern, animated personal portfolio built with Next.js, Framer Motion, and Tailwind CSS. Features smooth scrolling, 3D effects, and responsive design.",
-    image: "/projects/portfolio.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/Zuohuang-Cai",
     demo: "/",
     featured: true
   },
   {
-    title: "E-Commerce Platform",
-    description: "Full-stack e-commerce solution with user authentication, payment integration, and admin dashboard.",
-    image: "/projects/ecommerce.png",
-    tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-    github: "https://github.com/Zuohuang-Cai",
-    featured: true
+    title: "Baby Groente Tas",
+    description: (
+      <>
+        A modern product management automation platform developed for Stichting{" "}
+        <ProjectDescLink href="https://www.babygroentetas.nl/">Baby Groente Tas</ProjectDescLink>.
+      </>
+    ),
+    tags: ["React", "Node.js", "PostgreSQL", "Next.js"],
+    demo: "https://baby-groente-tas.vercel.app/",
+    github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
   },
   {
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates and team features.",
-    image: "/projects/taskapp.png",
-    tags: ["React Native", "Firebase", "Redux"],
-    github: "https://github.com/Zuohuang-Cai"
-  },
-  {
-    title: "Data Visualization Dashboard",
-    description: "Interactive dashboard for analyzing and visualizing complex datasets with charts and graphs.",
-    image: "/projects/dashboard.png",
-    tags: ["React", "D3.js", "Python", "FastAPI"],
-    demo: "https://example.com"
+    title: "Jouw Autisme Drive",
+    description: (
+      <>
+        A professional Document management and streaming platform for{" "}
+        <ProjectDescLink href="https://jouwautisme.nl/">Jouw Autisme</ProjectDescLink>.
+      </>
+    ),
+    image: "/Projects/jouwArtismeDrive.png",
+    tags: ["React", "C#", ".Net", "Next.js", "PostgreSQL"],
+    demo: "https://mgo4o840840w4w8oscsoogcc.quixly.xyz/",
+    github: "https://github.com/Zuohuang-Cai/Spectrumvisie-BE"
   }
 ];
 
@@ -65,23 +77,33 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <motion.div
       ref={cardRef}
-      className={`group relative ${project.featured ? 'md:col-span-2' : ''}`}
+      className={`group relative ${project.featured ? "md:col-span-2" : ""}`}
       initial={{ opacity: 0, y: 50, scale: 0.9 }}
       animate={isInView ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 50, scale: 0.9 }}
       transition={{ type: "spring", damping: 20, stiffness: 100 }}
       whileHover={{ y: -10 }}
     >
-      <div className="relative h-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700/50">
-        <div className="relative h-48 overflow-hidden bg-gradient-to-br from-purple-900/30 to-pink-900/30">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              className="text-6xl opacity-20"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            >
-              💻
-            </motion.div>
-          </div>
+      <div
+        className="relative w-full h-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700/50">
+        <div className="w-full relative h-48 overflow-hidden bg-gradient-to-br from-purple-900/30 to-pink-900/30">
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="absolute inset-0 flex items-center justify-center">
+              <motion.div
+                className="text-6xl opacity-30"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              >
+                💻
+              </motion.div>
+            </div>
+          )}
+          {/* Hover overlay */}
           <motion.div
             className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-4 gap-3"
           >
@@ -104,7 +126,8 @@ function ProjectCard({ project }: { project: Project }) {
           </motion.div>
 
           {project.featured && (
-            <div className="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-semibold text-white">
+            <div
+              className="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-semibold text-white">
               Featured
             </div>
           )}
@@ -114,7 +137,7 @@ function ProjectCard({ project }: { project: Project }) {
           <h3 className="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
             {project.title}
           </h3>
-          <p className="text-gray-400 text-sm mb-4 line-clamp-2">
+          <p className="text-gray-400 text-sm mb-4 line-clamp-3">
             {project.description}
           </p>
 
@@ -160,7 +183,7 @@ export default function Projects() {
           className="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
-            y: [0, 30, 0],
+            y: [0, 30, 0]
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
@@ -168,7 +191,7 @@ export default function Projects() {
           className="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl"
           animate={{
             x: [0, -30, 0],
-            y: [0, -50, 0],
+            y: [0, -50, 0]
           }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         />
