@@ -15,3 +15,17 @@
     transform-origin: 250px 420px;
 }
 
+/* Grid animation for design page */
+@keyframes gridMove {
+    0% {
+        transform: translate(0, 0);
+    }
+    100% {
+        transform: translate(50px, 50px);
+    }
+}
+
+.animate-grid-move {
+    animation: gridMove 20s linear infinite;
+}
+

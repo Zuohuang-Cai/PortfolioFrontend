@@ -79,7 +79,7 @@ const Navigation = ({
       setZIndex("z-50");
     }}
   >
-    {[0, 1, 2, 3, 4].map((i) => (
+    {navItems.map((_, i) => (
       <MenuItem key={i} i={i} />
     ))}
   </motion.ul>
@@ -102,20 +102,142 @@ const itemVariants = {
   }
 };
 
+const navItems = [
+  { name: "Home", href: "#home", icon: "🏠", desc: "Back to top" },
+  { name: "Design", href: "#design", icon: "🎨", desc: "Design philosophy" },
+  { name: "Projects", href: "#projects", icon: "💼", desc: "View my work" },
+  { name: "Skills", href: "#skills", icon: "⚡", desc: "Technical skills" },
+  { name: "Contact", href: "#contact", icon: "📧", desc: "Get in touch" }
+];
+
 const colors = ["#FF008C", "#D309E1", "#9C1AFF", "#7700FF", "#4400FF"];
 
+const handleAnchorClick = (e: React.MouseEvent, href: string) => {
+  if (href.startsWith("#")) {
+    e.preventDefault();
+    const element = document.querySelector(href) as HTMLElement;
+    if (element) {
+      // Calculate absolute position by walking up the offsetParent chain
+      let offsetTop = 0;
+      let currentElement: HTMLElement | null = element;
+      while (currentElement) {
+        offsetTop += currentElement.offsetTop;
+        currentElement = currentElement.offsetParent as HTMLElement | null;
+      }
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "instant"
+      });
+    }
+  }
+};
+
 const MenuItem = ({ i }: { i: number }) => {
-  const border = `2px solid ${colors[i]}`;
+  const item = navItems[i];
+  const color = colors[i];
 
   return (
     <motion.li
       style={listItem}
       variants={itemVariants}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{
+        scale: 1.05,
+        x: 10
+      }}
+      whileTap={{ scale: 0.98 }}
     >
-      <div style={{ ...iconPlaceholder, border }} />
-      <div style={{ ...textPlaceholder, border }} />
+      <a
+        href={item.href}
+        onClick={(e) => handleAnchorClick(e, item.href)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          textDecoration: "none",
+          width: "100%",
+          padding: "12px 16px",
+          borderRadius: "16px",
+          background: `linear-gradient(135deg, ${color}15, transparent)`,
+          border: `1px solid ${color}30`,
+          transition: "all 0.3s ease",
+          position: "relative",
+          overflow: "hidden"
+        }}
+      >
+        {/* Glow effect on hover */}
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `radial-gradient(circle at left, ${color}20, transparent 70%)`,
+            opacity: 0,
+            transition: "opacity 0.3s ease"
+          }}
+          whileHover={{ opacity: 1 }}
+        />
+
+        {/* Icon container */}
+        <div
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: "12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: "24px",
+            background: `linear-gradient(135deg, ${color}30, ${color}10)`,
+            border: `2px solid ${color}50`,
+            marginRight: 16,
+            boxShadow: `0 4px 15px ${color}30`
+          }}
+        >
+          {item.icon}
+        </div>
+
+        {/* Text container */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center"
+          }}
+        >
+          <span
+            style={{
+              color: "white",
+              fontSize: "20px",
+              fontWeight: 600,
+              letterSpacing: "0.5px",
+              textShadow: `0 0 20px ${color}50`
+            }}
+          >
+            {item.name}
+          </span>
+          <span
+            style={{
+              fontSize: "12px",
+              color: color,
+              opacity: 0.8,
+              marginTop: 2
+            }}
+          >
+            {item.desc}
+          </span>
+        </div>
+
+        {/* Arrow indicator */}
+        <motion.div
+          style={{
+            marginLeft: "auto",
+            fontSize: "20px",
+            color: color,
+            opacity: 0.6
+          }}
+          whileHover={{ x: 5, opacity: 1 }}
+        >
+          →
+        </motion.div>
+      </a>
     </motion.li>
   );
 };
@@ -259,33 +381,10 @@ const listItem: React.CSSProperties = {
   padding: 0,
   margin: 0,
   listStyle: "none",
-  marginBottom: 20,
+  marginBottom: 12,
   cursor: "pointer"
 };
 
-const iconPlaceholder: React.CSSProperties = {
-  width: 40,
-  height: 40,
-  borderRadius: "50%",
-  flex: "40px 0",
-  marginRight: 20
-};
-
-const textPlaceholder: React.CSSProperties = {
-  borderRadius: 5,
-  width: 200,
-  height: 20,
-  flex: 1
-};
-
-/**
- * ==============   Utils   ================
- */
-
-// Naive implementation - in reality would want to attach
-// a window or resize listener. Also use state/layoutEffect instead of ref/effect
-// if this is important to know on initial client render.
-// It would be safer to  return null for unmeasured states.
 const useDimensions = (ref: React.RefObject<HTMLDivElement | null>) => {
   const dimensions = useRef({ width: 0, height: 0 });
 

@@ -23,6 +23,7 @@ import Quations from "@/components/svgs/quations";
 import Projects from "@/components/projects";
 import ContactForm from "@/components/contactForm";
 import Footer from "@/components/footer";
+import { DesignSection } from "@/components/design";
 
 export default function DesktopHome() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -30,7 +31,7 @@ export default function DesktopHome() {
   return (
     <DefaultLayout>
       <SmoothScroll>
-        <div className={"flex flex-wrap min-h-[120vh] relative"}>
+        <div id="home" className={"flex flex-wrap min-h-[120vh] relative"}>
           <div className={"h-full w-full overflow-hidden absolute"}>
             <LightLine left={10} rotate={"rotate-[115deg]"} top={287} />
             <LightLine left={10} rotate={"rotate-[15deg]"} top={587} />
@@ -165,7 +166,7 @@ export default function DesktopHome() {
             </p>
           </div>
         </div>
-        <div className={"h-dvh w-full bg-purple-500 flex"}>
+        <div id="portrait" className={"h-dvh w-full bg-purple-500 flex"}>
           <div
             className={
               "w-[15%] bg-black flex flex-col justify-around items-center"
@@ -193,7 +194,7 @@ export default function DesktopHome() {
           </div>
         </div>
 
-        <div className={"h-screen w-full"}>
+        <div id="skills" className={"h-screen w-full"}>
           <HorizontalScroll />
         </div>
 
@@ -202,9 +203,15 @@ export default function DesktopHome() {
           <Quations />
         </div>
 
-        <Projects />
+        <DesignSection />
 
-        <ContactForm />
+        <div id="projects">
+          <Projects />
+        </div>
+
+        <div id="contact">
+          <ContactForm />
+        </div>
 
         <Footer />
       </SmoothScroll>

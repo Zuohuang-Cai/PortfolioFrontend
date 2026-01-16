@@ -17,7 +17,8 @@ import LightLine from "@/components/LightLine";
 import { Slippery } from "@/components/icons";
 import Photography from "@/components/photography";
 import Quations from "@/components/svgs/quations";
-import MobileSkills from "@/components/home/MobileSkills";
+import MobileSkills from "@/components/design/mobile/MobileSkills";
+import MobileDesignSection from "@/components/design/mobile/MobileDesignSection";
 import Projects from "@/components/projects";
 import ContactForm from "@/components/contactForm";
 import Footer from "@/components/footer";
@@ -138,9 +139,15 @@ export default function MobileHome() {
           <Quations />
         </div>
 
-        <Projects />
+        <MobileDesignSection />
 
-        <ContactForm />
+        <div id="projects">
+          <Projects />
+        </div>
+
+        <div id="contact">
+          <ContactForm />
+        </div>
 
         <Footer />
       </div>
