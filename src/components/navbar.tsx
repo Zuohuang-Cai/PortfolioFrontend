@@ -1,6 +1,6 @@
 "use client";
 
-import { Variants } from "framer-motion";
+import { Variants, useScroll, useTransform, useSpring, useMotionValueEvent } from "framer-motion";
 import { motion } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 
@@ -11,9 +11,48 @@ export default function Navbar() {
   const { height } = useDimensions(containerRef);
   const [zIndex, setZIndex] = useState("-z-10");
 
+  // Scroll tracking for elastic bounce effect
+  const { scrollY } = useScroll();
+  const [scrollDirection, setScrollDirection] = useState<"up" | "down" | null>(null);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  // Spring animation for elastic effect
+  const springConfig = { stiffness: 300, damping: 20, mass: 0.8 };
+  const yOffset = useSpring(0, springConfig);
+  const rotate = useSpring(0, springConfig);
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const diff = latest - lastScrollY;
+
+    if (Math.abs(diff) > 2) {
+      // Apply a subtle bounce based on scroll velocity
+      const velocity = Math.min(Math.abs(diff) * 0.3, 8);
+      const direction = diff > 0 ? 1 : -1;
+
+      yOffset.set(direction * velocity);
+      rotate.set(direction * velocity * 0.15);
+
+      // Reset after bounce
+      setTimeout(() => {
+        yOffset.set(0);
+        rotate.set(0);
+      }, 100);
+
+      setScrollDirection(diff > 0 ? "down" : "up");
+      setLastScrollY(latest);
+    }
+  });
+
   return (
     <>
-      <div className={"sticky top-0"} style={{ zIndex: "100" }}>
+      <motion.div
+        className={"fixed top-0 right-0"}
+        style={{
+          zIndex: 100,
+          y: yOffset,
+          rotate: rotate
+        }}
+      >
         <MenuToggle
           isOpen={isOpen}
           toggle={() => {
@@ -21,8 +60,8 @@ export default function Navbar() {
             setHidden(false);
           }}
         />
-      </div>
-      <div className={`top-0 sticky ${zIndex}`}>
+      </motion.div>
+      <div className={`fixed top-0 left-0 right-0 ${zIndex}`}>
         <div style={container}>
           <motion.nav
             ref={containerRef}
@@ -104,9 +143,9 @@ const itemVariants = {
 
 const navItems = [
   { name: "Home", href: "#home", icon: "🏠", desc: "Back to top" },
+  { name: "Skills", href: "#skills", icon: "⚡", desc: "Technical skills" },
   { name: "Design", href: "#design", icon: "🎨", desc: "Design philosophy" },
   { name: "Projects", href: "#projects", icon: "💼", desc: "View my work" },
-  { name: "Skills", href: "#skills", icon: "⚡", desc: "Technical skills" },
   { name: "Contact", href: "#contact", icon: "📧", desc: "Get in touch" }
 ];
 

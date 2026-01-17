@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 
-export default function DesignHero() {
+export default function DesignPhilosophy() {
   return (
     <motion.section
       className="relative h-[50vh] flex items-center justify-center overflow-hidden"

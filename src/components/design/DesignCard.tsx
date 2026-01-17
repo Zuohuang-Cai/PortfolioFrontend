@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 
 interface DesignItem {
   name: string;
@@ -69,86 +69,98 @@ export default function DesignCard({
         <p className="text-gray-400 mb-4 leading-relaxed">{item.description}</p>
 
         {/* Code Block (for Design Patterns) */}
-        {item.code && isSelected && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="overflow-hidden"
-          >
-            <pre
-              className="p-4 rounded-lg text-sm overflow-x-auto font-mono"
-              style={{
-                background: "rgba(0,0,0,0.5)",
-                border: `1px solid ${color}30`
-              }}
+        <AnimatePresence mode="wait">
+          {item.code && isSelected && (
+            <motion.div
+              key="code-block"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="overflow-hidden"
             >
-              <code className="text-gray-300">{item.code}</code>
-            </pre>
-          </motion.div>
-        )}
+              <pre
+                className="p-4 rounded-lg text-sm overflow-x-auto font-mono"
+                style={{
+                  background: "rgba(0,0,0,0.5)",
+                  border: `1px solid ${color}30`
+                }}
+              >
+                <code className="text-gray-300">{item.code}</code>
+              </pre>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Pros & Cons (for Architecture) */}
-        {item.pros && isSelected && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="grid grid-cols-2 gap-4 mt-4"
-          >
-            <div>
-              <h4 className="text-green-400 text-sm font-semibold mb-2">Pros</h4>
-              <ul className="space-y-1">
-                {item.pros?.map((pro, i) => (
-                  <li
-                    key={i}
-                    className="text-sm text-gray-400 flex items-center gap-2"
-                  >
-                    <span className="text-green-400">✓</span> {pro}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-red-400 text-sm font-semibold mb-2">Cons</h4>
-              <ul className="space-y-1">
-                {item.cons?.map((con, i) => (
-                  <li
-                    key={i}
-                    className="text-sm text-gray-400 flex items-center gap-2"
-                  >
-                    <span className="text-red-400">✗</span> {con}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence mode="wait">
+          {item.pros && isSelected && (
+            <motion.div
+              key="pros-cons"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="grid grid-cols-2 gap-4 mt-4"
+            >
+              <div>
+                <h4 className="text-green-400 text-sm font-semibold mb-2">Pros</h4>
+                <ul className="space-y-1">
+                  {item.pros?.map((pro, i) => (
+                    <li
+                      key={i}
+                      className="text-sm text-gray-400 flex items-center gap-2"
+                    >
+                      <span className="text-green-400">✓</span> {pro}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h4 className="text-red-400 text-sm font-semibold mb-2">Cons</h4>
+                <ul className="space-y-1">
+                  {item.cons?.map((con, i) => (
+                    <li
+                      key={i}
+                      className="text-sm text-gray-400 flex items-center gap-2"
+                    >
+                      <span className="text-red-400">✗</span> {con}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Layers (for Clean Architecture) */}
-        {item.layers && isSelected && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className="mt-4"
-          >
-            <div className="flex flex-col items-center gap-2">
-              {item.layers.map((layer, i) => (
-                <div
-                  key={layer}
-                  className="w-full text-center py-2 rounded-lg text-sm"
-                  style={{
-                    background: `${color}${(4 - i) * 15 + 10}`,
-                    width: `${100 - i * 15}%`
-                  }}
-                >
-                  {layer}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        )}
+        <AnimatePresence mode="wait">
+          {item.layers && isSelected && (
+            <motion.div
+              key="layers"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="mt-4"
+            >
+              <div className="flex flex-col items-center gap-2">
+                {item.layers.map((layer, i) => (
+                  <div
+                    key={layer}
+                    className="w-full text-center py-2 rounded-lg text-sm"
+                    style={{
+                      background: `${color}${(4 - i) * 15 + 10}`,
+                      width: `${100 - i * 15}%`
+                    }}
+                  >
+                    {layer}
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Expand indicator */}
         <div className="flex justify-center mt-4">

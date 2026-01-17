@@ -10,7 +10,7 @@ import { useState } from "react";
 import { GithubIcon } from "@/components/icons";
 import { LinkedinIcon } from "@/components/icons";
 import { GmailLogo } from "@/components/icons";
-import Cv from "@/components/cv";
+import Cv from "@/components/svgs/cv";
 import DefaultLayout from "@/components/layouts/default";
 import BackgroundLight from "@/components/backgroundLight";
 import RotatedCross from "@/components/RotatedCross";
