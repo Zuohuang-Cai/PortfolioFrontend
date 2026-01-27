@@ -80,28 +80,8 @@ const projects: Project[] = [
     tags: ["TypeScript", "Supabase", "PostgreSQL", "Next.js"]
   },
   {
-    types: ["solo", "school", "outdated"],
-    title: "Binsta",
-    image: "/Projects/Binsta.png",
-    description: "a social media platform that allows users to share images and videos, follow other users, and engage with content through likes and comments.",
-    tags: ["Springboot", "Thymeleaf", "Mysql", "SpringSecurity", "SpringJPA"],
-    github: "https://github.com/Zuohuang-Cai/binsta/tree/main"
-  },
-  {
     types: ["team", "client"],
-    title: "Baby Groente Tas",
-    description: (
-      <>
-        A modern product management automation platform developed for Stichting{" "}
-        <ProjectDescLink href="https://www.babygroentetas.nl/">Baby Groente Tas</ProjectDescLink>.
-      </>
-    ),
-    tags: ["React", "Node.js", "PostgreSQL", "Next.js"],
-    demo: "https://baby-groente-tas.vercel.app/",
-    github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
-  },
-  {
-    types: ["team", "client"],
+    featured: true,
     title: "Jouw Autisme Drive",
     description: (
       <>
@@ -113,6 +93,27 @@ const projects: Project[] = [
     tags: ["React", "C#", ".Net", "Next.js", "PostgreSQL"],
     demo: "https://mgo4o840840w4w8oscsoogcc.quixly.xyz/",
     github: "https://github.com/Zuohuang-Cai/Spectrumvisie-BE"
+  },
+  {
+    types: ["solo", "school", "outdated"],
+    title: "Binsta",
+    image: "/Projects/Binsta.png",
+    description: "a social media platform that allows users to share images and videos, follow other users, and engage with content through likes and comments.",
+    tags: ["Springboot", "Thymeleaf", "Mysql", "SpringSecurity", "SpringJPA"],
+    github: "https://github.com/Zuohuang-Cai/binsta/tree/main"
+  },
+  {
+    types: ["team", "client", "outdated"],
+    title: "Baby Groente Tas",
+    description: (
+      <>
+        A modern product management automation platform developed for Stichting{" "}
+        <ProjectDescLink href="https://www.babygroentetas.nl/">Baby Groente Tas</ProjectDescLink>.
+      </>
+    ),
+    tags: ["React", "Node.js", "PostgreSQL", "Next.js"],
+    demo: "https://baby-groente-tas.vercel.app/",
+    github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
   }
 ];
 
