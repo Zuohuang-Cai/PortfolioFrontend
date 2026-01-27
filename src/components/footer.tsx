@@ -154,20 +154,10 @@ export default function Footer() {
           <p className="text-gray-500 text-sm">
             © {currentYear} Zuohuang Cai. All rights reserved.
           </p>
-          <p className="text-gray-600 text-xs flex items-center gap-1">
-            Built with
-            <motion.span
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-            >
-              ❤️
-            </motion.span>
-            using Next.js & Framer Motion
-          </p>
+
         </motion.div>
       </div>
 
-      {/* 返回顶部按钮 */}
       <motion.button
         className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25 flex items-center justify-center z-50"
         initial={{ opacity: 0, scale: 0 }}

@@ -12,6 +12,7 @@ interface Project {
   github?: string;
   demo?: string;
   featured?: boolean;
+  types: string[];
 }
 
 const ProjectDescLink = ({ href, children }: { href: string; children: ReactNode }) => (
@@ -26,14 +27,68 @@ const ProjectDescLink = ({ href, children }: { href: string; children: ReactNode
 
 const projects: Project[] = [
   {
+    types: ["solo"],
     title: "Portfolio Website",
     description: "A modern, animated personal portfolio built with Next.js, Framer Motion, and Tailwind CSS. Features smooth scrolling, 3D effects, and responsive design.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    tags: ["Hero ui", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
     github: "https://github.com/Zuohuang-Cai",
     demo: "/",
     featured: true
   },
   {
+    types: ["team", "client", "Internship"],
+    title: "Kiosk Management System",
+    image: "/Projects/kms.png",
+    description: (
+      <>
+        A simple kiosk management system built with TypeScript, React, and Next.js, allowing kitchen staff to view
+        orders and manage settings through the UI.
+      </>
+    ),
+    tags: ["TypeScript", "React", "next.js", "Redux"]
+  },
+  {
+    title: "kiosk",
+    types: ["team", "client", "Internship"],
+    description: (
+      <>
+        A kiosk ordering system developed during my internship at <ProjectDescLink
+        href="https://povis.nl/">Povis</ProjectDescLink>, featuring a React Native (Expo) UI
+      </>
+    ),
+    image: "/Projects/kiosk.png",
+    tags: ["React Native", "Expo", "TypeScript", "Redux"]
+  },
+  {
+    title: "Epos Manager",
+    types: ["team", "client", "Internship"],
+    description: (
+      <>
+        Backend management system for a POS platform developed during my internship at <ProjectDescLink
+        href="https://povis.nl/">Povis</ProjectDescLink>, with contributions to
+        selected features using Spring Boot and MySQL.
+      </>
+    ),
+    image: "/Projects/epos.png",
+    tags: ["Springboot", "Thymeleaf", "Mysql", "SpringSecurity", "SpringJDBC", "SpringJPA"]
+  },
+  {
+    types: ["solo", "client"],
+    title: "Inventory Management System",
+    description: "A Inventory Management System (IMS) that streamlines product tracking, stock management, and order processing for businesses.",
+    image: "/Projects/IMS.png",
+    tags: ["TypeScript", "Supabase", "PostgreSQL", "Next.js"]
+  },
+  {
+    types: ["solo", "school", "outdated"],
+    title: "Binsta",
+    image: "/Projects/Binsta.png",
+    description: "a social media platform that allows users to share images and videos, follow other users, and engage with content through likes and comments.",
+    tags: ["Springboot", "Thymeleaf", "Mysql", "SpringSecurity", "SpringJPA"],
+    github: "https://github.com/Zuohuang-Cai/binsta/tree/main"
+  },
+  {
+    types: ["team", "client"],
     title: "Baby Groente Tas",
     description: (
       <>
@@ -46,6 +101,7 @@ const projects: Project[] = [
     github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
   },
   {
+    types: ["team", "client"],
     title: "Jouw Autisme Drive",
     description: (
       <>
@@ -124,13 +180,26 @@ function ProjectCard({ project }: { project: Project }) {
               </Link>
             )}
           </motion.div>
+          <div className="absolute top-3 right-3 flex gap-2">
 
-          {project.featured && (
-            <div
-              className="absolute top-3 right-3 px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-semibold text-white">
-              Featured
-            </div>
-          )}
+            {/*{project.featured && (*/}
+            {/*  <div*/}
+            {/*    className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-semibold text-white"*/}
+            {/*  >*/}
+            {/*    Featured*/}
+            {/*  </div>*/}
+            {/*)}*/}
+
+            {project.types.map((type, index) => (
+              <div
+                key={index}
+                className="px-3 py-1 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-xs font-semibold text-white"
+              >
+                {type}
+              </div>
+            ))}
+          </div>
+
         </div>
 
         <div className="p-6">

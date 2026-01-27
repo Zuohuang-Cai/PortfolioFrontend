@@ -17,7 +17,7 @@ const skills: SkillCard[] = [
     title: "Frontend",
     icon: "🎨",
     description: "Building beautiful, responsive user interfaces",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap"],
+    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap", "HERO UI"],
     color: "from-cyan-500 to-blue-600",
     glowColor: "rgba(6, 182, 212, 0.5)"
   },
@@ -25,7 +25,7 @@ const skills: SkillCard[] = [
     title: "Backend",
     icon: "⚙️",
     description: "Creating robust server-side applications",
-    technologies: ["Node.js", "C#", "Java", ".Net", "Springboot", "Express.js"],
+    technologies: ["Node.js", "C#", "Java", ".Net", "Springboot", "Express.js", "ORM"],
     color: "from-green-500 to-emerald-600",
     glowColor: "rgba(34, 197, 94, 0.5)"
   },
@@ -49,7 +49,7 @@ const skills: SkillCard[] = [
     title: "Mobile",
     icon: "📱",
     description: "Cross-platform mobile development",
-    technologies: ["React Native"],
+    technologies: ["React Native", "Native Wind"],
     color: "from-pink-500 to-rose-600",
     glowColor: "rgba(236, 72, 153, 0.5)"
   }
