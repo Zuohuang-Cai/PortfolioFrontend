@@ -144,7 +144,7 @@ function ProjectCard({ project }: { project: Project }) {
       <div
         className="relative w-full h-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-gray-800 border border-gray-700/50">
         <div
-          className={`w-full relative ${project.featured ? "h-96" : "h-42"} overflow-hidden bg-gradient-to-br from-purple-900/30 to-pink-900/30`}>
+          className={`w-full relative ${project.featured ? "md:h-96" : ""} h-42 overflow-hidden bg-gradient-to-br from-purple-900/30 to-pink-900/30`}>
           {project.image ? (
             <img
               src={project.image}
