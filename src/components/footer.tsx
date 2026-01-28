@@ -78,7 +78,6 @@ export default function Footer() {
 
       <div className="max-w-6xl mx-auto px-8 py-12">
         <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {/* Logo & 简介 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -94,7 +93,6 @@ export default function Footer() {
             </p>
           </motion.div>
 
-          {/* 快速链接 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -116,7 +114,6 @@ export default function Footer() {
             </ul>
           </motion.div>
 
-          {/* 社交链接 */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
@@ -141,10 +138,21 @@ export default function Footer() {
                 </motion.div>
               ))}
             </div>
+            <motion.button
+              className="mt-10 ml-auto w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25 flex items-center justify-center z-50"
+              initial={{ opacity: 0, scale: 0 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+              </svg>
+            </motion.button>
           </motion.div>
         </div>
 
-        {/* 底部版权 */}
         <motion.div
           className="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4"
           initial={{ opacity: 0 }}
@@ -157,19 +165,6 @@ export default function Footer() {
 
         </motion.div>
       </div>
-
-      <motion.button
-        className="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-pink-500 text-white shadow-lg hover:shadow-purple-500/25 flex items-center justify-center z-50"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-        </svg>
-      </motion.button>
     </footer>
   );
 }
