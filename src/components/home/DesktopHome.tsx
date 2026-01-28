@@ -94,20 +94,23 @@ export default function DesktopHome() {
               <div className={"flex justify-center flex-col my-3"}>
                 <div className={"flex"}>
                   <Link
+                    target="_blank"
                     className={"mx-1"}
                     href="https://github.com/Zuohuang-Cai"
                   >
                     <GithubIcon />
                   </Link>
                   <Link
+                    target="_blank"
                     className={"mx-1"}
                     href="https://www.linkedin.com/in/zuohuang-cai/"
                   >
                     <LinkedinIcon />
                   </Link>
                   <Link
+                    target="_blank"
                     className={"mx-1"}
-                    href="https://mail.google.com/mail/?view=cm&fs=1&to=zc26226@gmail.com"
+                    href="mailto:zc26226@gmail.com"
                   >
                     <GmailLogo />
                   </Link>
@@ -130,6 +133,9 @@ export default function DesktopHome() {
                     }}
                   />
                   <Button
+                    as="a"
+                    target="_blank"
+                    href={"/Zuohuang_Cai_CV.pdf"}
                     className="relative px-6 py-3 bg-gradient-to-r from-purple-800 via-pink-700 to-cyan-700 text-white font-semibold rounded-xl border-none shadow-lg"
                     endContent={<Cv />}
                   >

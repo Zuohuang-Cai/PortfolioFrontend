@@ -129,6 +129,7 @@ export default function Footer() {
                   transition={{ delay: 0.4 + index * 0.1 }}
                 >
                   <Link
+                    target="_blank"
                     href={social.href}
                     className="w-10 h-10 rounded-full bg-gray-800 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
                     aria-label={social.name}

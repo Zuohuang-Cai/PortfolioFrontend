@@ -81,13 +81,13 @@ export default function MobileHome() {
             </p>
 
             <div className="flex justify-center my-4 gap-4">
-              <Link href="https://github.com/Zuohuang-Cai">
+              <Link target="_blank" href="https://github.com/Zuohuang-Cai">
                 <GithubIcon />
               </Link>
-              <Link href="https://www.linkedin.com/in/zuohuang-cai/">
+              <Link target="_blank" href="https://www.linkedin.com/in/zuohuang-cai/">
                 <LinkedinIcon />
               </Link>
-              <Link href="https://mail.google.com/mail/?view=cm&fs=1&to=zc26226@gmail.com">
+              <Link target="_blank" href="mailto:zc26226@gmail.com">
                 <GmailLogo />
               </Link>
             </div>
@@ -109,6 +109,9 @@ export default function MobileHome() {
                 }}
               />
               <Button
+                as="a"
+                target="_blank"
+                href={"/Zuohuang_Cai_CV.pdf"}
                 className="relative px-6 py-3 bg-gradient-to-r from-purple-800 via-pink-700 to-cyan-700 text-white/90 font-semibold rounded-xl border border-white/10 shadow-lg"
                 endContent={<Cv />}
               >
