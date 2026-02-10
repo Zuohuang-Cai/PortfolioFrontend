@@ -96,15 +96,14 @@ const projects: Project[] = [
     github: "https://github.com/Zuohuang-Cai/Spectrumvisie-BE"
   },
   {
-    types: ["solo", "school", "outdated"],
-    title: "Binsta",
-    image: "/Projects/Binsta.png",
-    description: "a social media platform that allows users to share images and videos, follow other users, and engage with content through likes and comments.",
-    tags: ["Springboot", "Thymeleaf", "Mysql", "SpringSecurity", "SpringJPA"],
-    github: "https://github.com/Zuohuang-Cai/binsta/tree/main"
+    types: ["team", "school", "on progress"],
+    title: "Speed Code",
+    description: "an online collaborative coding platform where users can solve programming problems together and share their problem-solving approaches in real time. ",
+    tags: [".Net 9", "C#", "Postgres sql", "orm", "Judge0"],
+    github: "https://github.com/Zuohuang-Cai/Speedcode-backend"
   },
   {
-    types: ["team", "client", "outdated"],
+    types: ["team", "client"],
     title: "Baby Groente Tas",
     description: (
       <>
@@ -113,8 +112,8 @@ const projects: Project[] = [
       </>
     ),
     tags: ["React", "Node.js", "PostgreSQL", "Next.js"],
-    demo: "https://baby-groente-tas.vercel.app/",
-    github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
+    demo: "https://baby-groente-tas.vercel.app/"
+    // github: "https://github.com/BabyGroenteTas/BabyGroenteTas-App"
   }
 ];
 
