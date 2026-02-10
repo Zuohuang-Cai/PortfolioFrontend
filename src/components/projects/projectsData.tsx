@@ -28,7 +28,7 @@ export const projects: ProjectData[] = [
     title: "Portfolio Website",
     description: "A modern, animated personal portfolio built with Next.js, Framer Motion, and Tailwind CSS. Features smooth scrolling, 3D effects, and responsive design.",
     tags: ["Hero ui", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/Zuohuang-Cai",
+    github: "https://github.com/Zuohuang-Cai/PortfolioFrontend",
     demo: "/",
     image: "/Projects/portfolio.png",
     featured: true
