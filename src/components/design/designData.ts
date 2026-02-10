@@ -1,4 +1,3 @@
-// Design patterns and principles data
 export interface DesignItem {
   name: string;
   description: string;

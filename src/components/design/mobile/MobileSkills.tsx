@@ -2,60 +2,9 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { programmingSkills, SkillData } from "@/components/skills/skillsData";
 
-interface SkillCard {
-  title: string;
-  icon: string;
-  description: string;
-  technologies: string[];
-  color: string;
-  glowColor: string;
-}
-
-const skills: SkillCard[] = [
-  {
-    title: "Frontend",
-    icon: "🎨",
-    description: "Building beautiful, responsive user interfaces",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap", "HERO UI"],
-    color: "from-cyan-500 to-blue-600",
-    glowColor: "rgba(6, 182, 212, 0.5)"
-  },
-  {
-    title: "Backend",
-    icon: "⚙️",
-    description: "Creating robust server-side applications",
-    technologies: ["Node.js", "C#", "Java", ".Net", "Springboot", "Express.js", "ORM"],
-    color: "from-green-500 to-emerald-600",
-    glowColor: "rgba(34, 197, 94, 0.5)"
-  },
-  {
-    title: "Database",
-    icon: "🗄️",
-    description: "Designing efficient data architectures",
-    technologies: ["PostgreSQL", "Redis", "MySQL"],
-    color: "from-purple-500 to-violet-600",
-    glowColor: "rgba(168, 85, 247, 0.5)"
-  },
-  {
-    title: "DevOps",
-    icon: "🚀",
-    description: "Streamlining deployment & infrastructure",
-    technologies: ["Docker", "Azure", "CI/CD"],
-    color: "from-orange-500 to-red-600",
-    glowColor: "rgba(249, 115, 22, 0.5)"
-  },
-  {
-    title: "Mobile",
-    icon: "📱",
-    description: "Cross-platform mobile development",
-    technologies: ["React Native", "Native Wind"],
-    color: "from-pink-500 to-rose-600",
-    glowColor: "rgba(236, 72, 153, 0.5)"
-  }
-];
-
-function SkillCardItem({ skill, index }: { skill: SkillCard; index: number }) {
+function SkillCardItem({ skill, index }: { skill: SkillData; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -213,7 +162,7 @@ export default function MobileSkills() {
         />
       </motion.div>
       <div className="space-y-4">
-        {skills.map((skill, index) => (
+        {programmingSkills.map((skill, index) => (
           <SkillCardItem key={skill.title} skill={skill} index={index} />
         ))}
       </div>

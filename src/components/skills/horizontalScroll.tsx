@@ -3,52 +3,11 @@
 import { useEffect, useRef, useState, ReactNode } from "react";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useSmoothScroll } from "@/context/smoothScrollContext";
+import { programmingSkills, SkillData } from "./skillsData";
 
-interface SkillCard {
-  title: string;
-  icon: ReactNode;
-  description: string;
-  technologies: string[];
-  color: string;
+interface SkillCard extends SkillData {
+  iconElement?: ReactNode;
 }
-
-const programmingSkills: SkillCard[] = [
-  {
-    title: "Frontend Development",
-    icon: <CodeIcon />,
-    description: "Building beautiful, responsive user interfaces",
-    technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Bootstrap"],
-    color: "from-blue-500 to-cyan-400"
-  },
-  {
-    title: "Backend Development",
-    icon: <ServerIcon />,
-    description: "Creating robust and scalable server solutions",
-    technologies: ["Node.js", "C#", "Java", ".Net", "Springboot", "Express.js"],
-    color: "from-green-500 to-emerald-400"
-  },
-  {
-    title: "Database Design",
-    icon: <DatabaseIcon />,
-    description: "Designing efficient data structures and queries",
-    technologies: ["PostgreSQL", "Redis", "MySQL"],
-    color: "from-purple-500 to-pink-400"
-  },
-  {
-    title: "DevOps & Cloud",
-    icon: <CloudIcon />,
-    description: "Deploying and managing cloud infrastructure",
-    technologies: ["Docker", "Azure", "CI/CD"],
-    color: "from-orange-500 to-yellow-400"
-  },
-  {
-    title: "Mobile Development",
-    icon: <MobileIcon />,
-    description: "Creating cross-platform mobile applications",
-    technologies: ["React Native"],
-    color: "from-red-500 to-rose-400"
-  }
-];
 
 // 动画变体
 const containerVariants = {
@@ -116,11 +75,11 @@ function SkillCardComponent({ skill }: { skill: SkillCard }) {
           </motion.div>
 
           <motion.div
-            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center mb-6`}
+            className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${skill.color} flex items-center justify-center mb-6 text-3xl`}
             whileHover={{ rotate: 360 }}
             transition={{ duration: 0.5 }}
           >
-            {skill.icon}
+            {skill.iconElement || skill.icon}
           </motion.div>
 
           <motion.h3
@@ -129,7 +88,7 @@ function SkillCardComponent({ skill }: { skill: SkillCard }) {
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ delay: 0.2 }}
           >
-            {skill.title}
+            {skill.fullTitle || skill.title}
           </motion.h3>
 
           <motion.p

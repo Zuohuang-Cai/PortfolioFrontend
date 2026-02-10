@@ -3,11 +3,11 @@
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 
-const DesktopHome = dynamic(() => import("@/components/home/DesktopHome"), {
+const DesktopHome = dynamic(() => import("@/components/DesktopPage"), {
   ssr: false
 });
 
-const MobileHome = dynamic(() => import("@/components/home/MobileHome"), {
+const MobileHome = dynamic(() => import("@/components/MobilePage"), {
   ssr: false
 });
 

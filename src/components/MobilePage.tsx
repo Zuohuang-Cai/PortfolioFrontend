@@ -7,23 +7,23 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useState } from "react";
 
-import { GithubIcon } from "@/components/icons";
-import { LinkedinIcon } from "@/components/icons";
-import { GmailLogo } from "@/components/icons";
+import { GithubIcon } from "@/components/svgs/icons";
+import { LinkedinIcon } from "@/components/svgs/icons";
+import { GmailLogo } from "@/components/svgs/icons";
 import Cv from "@/components/svgs/cv";
 import DefaultLayout from "@/components/layouts/default";
-import BackgroundLight from "@/components/backgroundLight";
-import LightLine from "@/components/LightLine";
-import { Slippery } from "@/components/icons";
-import Photography from "@/components/photography";
+import BackgroundLight from "@/components/home/backgroundLight";
+import LightLine from "@/components/home/LightLine";
+import { Slippery } from "@/components/svgs/icons";
+import Photography from "@/components/home/photography";
 import Quations from "@/components/svgs/quations";
 import MobileSkills from "@/components/design/mobile/MobileSkills";
 import MobileDesignSection from "@/components/design/mobile/MobileDesignSection";
-import Projects from "@/components/projects";
-import ContactForm from "@/components/contactForm";
-import Footer from "@/components/footer";
+import Projects from "@/components/projects/projects";
+import ContactForm from "@/components/footer/contactForm";
+import Footer from "@/components/footer/footer";
 
-export default function MobileHome() {
+export default function MobilePage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
 
   return (

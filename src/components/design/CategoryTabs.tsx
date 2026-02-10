@@ -21,7 +21,7 @@ export default function CategoryTabs({
   return (
     <div className="sticky top-0 z-40 bg-black/80 backdrop-blur-lg border-b border-white/10">
       <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex gap-4 overflow-x-auto">
+        <div className="flex gap-4 overflow-x-auto p-1">
           {categories.map((category, index) => (
             <motion.button
               key={category.category}
