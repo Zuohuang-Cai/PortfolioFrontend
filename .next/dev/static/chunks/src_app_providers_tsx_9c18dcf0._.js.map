@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Applications/XAMPP/xamppfiles/htdocs/Codes/PortfolioFrontend/src/app/providers.tsx"],"sourcesContent":["\"use client\";\n\nimport * as React from \"react\";\nimport { HeroUIProvider } from \"@heroui/system\";\nimport { useRouter } from \"next/navigation\";\nimport { ThemeProvider as NextThemesProvider } from \"next-themes\";\nimport { ThemeProviderProps } from \"next-themes\";\n\nexport interface ProvidersProps {\n  children: React.ReactNode;\n  themeProps?: Omit<ThemeProviderProps, \"children\">;\n}\n\ndeclare module \"@react-types/shared\" {\n  interface RouterConfig {\n    routerOptions: NonNullable<\n      Parameters<ReturnType<typeof useRouter>[\"push\"]>[1]\n    >;\n  }\n}\n\nexport function Providers({ children, themeProps }: ProvidersProps) {\n  const router = useRouter();\n\n  return (\n    <HeroUIProvider navigate={router.push}>\n      <NextThemesProvider {...themeProps}>{children}</NextThemesProvider>\n    </HeroUIProvider>\n  );\n}\n"],"names":[],"mappings":";;;;;AAGA;AACA;AACA;;;AALA;;;;AAqBO,SAAS,UAAU,EAAE,QAAQ,EAAE,UAAU,EAAkB;;IAChE,MAAM,SAAS,IAAA,kJAAS;IAExB,qBACE,6LAAC,qLAAc;QAAC,UAAU,OAAO,IAAI;kBACnC,cAAA,6LAAC,oKAAkB;YAAE,GAAG,UAAU;sBAAG;;;;;;;;;;;AAG3C;GARgB;;QACC,kJAAS;;;KADV"}}]
+}

@@ -24,6 +24,7 @@ import Projects from "@/components/projects/projects";
 import ContactForm from "@/components/footer/contactForm";
 import Footer from "@/components/footer/footer";
 import { DesignSection } from "@/components/design";
+import ChatBox from "@/components/chat/ChatBox";
 
 export default function DesktopPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -59,7 +60,7 @@ export default function DesktopPage() {
             }
           >
             <div>
-              <div>
+              <div className={"size-full flex flex-col justify-center items-start"}>
                 <h1 className={"font-bold text-3xl my-1"}>
                   Hello, it&#39;s me
                 </h1>
@@ -146,23 +147,9 @@ export default function DesktopPage() {
             </div>
           </div>
           <div
-            className={"w-1/2 table:w-full flex justify-center items-center"}
+            className={"w-1/2 table:w-full flex justify-center items-center p-6 pl-0"}
           >
-            <motion.div
-              animate={{ y: 0, opacity: 1 }}
-              className={"z-10"}
-              initial={{ y: -20, opacity: 0 }}
-              transition={{ duration: 2 }}
-            >
-              <Image
-                alt="AI Avatar"
-                className={
-                  "h-[500px] w-[400px] table:w-[300px] table:h-[400px]"
-                }
-                isZoomed={true}
-                src="/AiAvatar.png"
-              />
-            </motion.div>
+            <ChatBox />
           </div>
 
           <div className={"h-[20vh] w-full justify-items-center self-end mb-4"}>
