@@ -23,7 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .env
-
+.next
 pnpm-lock.yaml
 yarn.lock
 package-lock.json

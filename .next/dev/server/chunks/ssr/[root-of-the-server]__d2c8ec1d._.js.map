@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Applications/XAMPP/xamppfiles/htdocs/Codes/PortfolioFrontend/src/app/blog/page.tsx"],"sourcesContent":["export default function BlogPage() {\n  return (\n    <div className=\"flex flex-col items-center justify-center min-h-screen\">\n      <h1 className=\"text-4xl font-bold\">Blog</h1>\n      <p className=\"text-gray-400 mt-4\">Coming soon...</p>\n    </div>\n  );\n}\n\n"],"names":[],"mappings":";;;;;;AAAe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;;0BACb,8OAAC;gBAAG,WAAU;0BAAqB;;;;;;0BACnC,8OAAC;gBAAE,WAAU;0BAAqB;;;;;;;;;;;;AAGxC"}}]
-}
