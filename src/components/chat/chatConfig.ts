@@ -10,7 +10,7 @@ export const QUICK_QUESTIONS = [
 ];
 
 export interface Message {
-  role: "user";
+  role: "user" | "assistant";
   content: string;
   streaming?: boolean;
 }

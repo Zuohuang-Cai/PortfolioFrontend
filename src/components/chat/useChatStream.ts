@@ -31,7 +31,7 @@ export function useChatStream() {
     setMessages(prev => [...prev, { role: "user", content: text }]);
     setInput("");
     setIsStreaming(true);
-    setMessages(prev => [...prev, { role: "assistant", content: "", streaming: true }]);
+    setMessages(prev => [...prev, { role: "assistant", content: "", streaming: true }] as Message[]);
 
     abortRef.current = new AbortController();
 
