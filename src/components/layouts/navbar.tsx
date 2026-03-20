@@ -311,6 +311,7 @@ interface PathProps {
 const Path = ({ isOpen, ...props }: PathProps) => (
   <motion.path
     animate={isOpen ? "open" : "closed"}
+    initial="closed"
     className={"w-[20px]"}
     fill="transparent"
     stroke="hsl(0, 0%, 18%)"
