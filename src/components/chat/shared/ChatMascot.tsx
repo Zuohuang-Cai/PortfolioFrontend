@@ -159,8 +159,11 @@ export default function ChatMascot({ mood = "idle" }: Props) {
           animate={{ opacity: isHovered || isClicked ? 0.6 : 0.2 }} transition={{ duration: 0.3 }} />
 
         {/* Mouth */}
-        <motion.path d={mouthPath[currentMood]} stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" fill="none"
-          animate={{ d: mouthPath[currentMood] }} transition={{ duration: 0.3 }} />
+        <motion.path
+          initial={{ d: mouthPath["idle"] }}
+          animate={{ d: mouthPath[currentMood] }}
+          stroke="#a78bfa" strokeWidth="2" strokeLinecap="round" fill="none"
+          transition={{ duration: 0.3 }} />
       </svg>
     </motion.div>
   );
