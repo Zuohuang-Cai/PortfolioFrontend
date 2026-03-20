@@ -24,7 +24,7 @@ import Projects from "@/components/projects/projects";
 import ContactForm from "@/components/footer/contactForm";
 import Footer from "@/components/footer/footer";
 import { DesignSection } from "@/components/design";
-import ChatBox from "@/components/chat/ChatBox";
+import ChatBox from "@/components/chat/desktop/ChatBox";
 
 export default function DesktopPage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");

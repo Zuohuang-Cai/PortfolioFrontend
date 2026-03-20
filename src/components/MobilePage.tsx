@@ -22,7 +22,7 @@ import MobileDesignSection from "@/components/design/mobile/MobileDesignSection"
 import Projects from "@/components/projects/projects";
 import ContactForm from "@/components/footer/contactForm";
 import Footer from "@/components/footer/footer";
-import ChatBox from "@/components/chat/ChatBox";
+import MobileChatFab from "@/components/chat/mobile/MobileChatFab";
 
 export default function MobilePage() {
   const [textColor, setTextColor] = useState("text-fuchsia-600");
@@ -42,11 +42,7 @@ export default function MobilePage() {
             defaultPosition={{ top: 50, left: 50 }}
           />
 
-          <div
-            className={"w-full flex justify-center items-center p-6 pl-0"}
-          >
-            <ChatBox />
-          </div>
+          <MobileChatFab />
 
           <div className="z-10 text-center">
             <h1 className="font-bold text-2xl my-1">Hello, it&#39;s me</h1>
