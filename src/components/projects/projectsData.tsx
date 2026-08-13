@@ -24,13 +24,12 @@ export const ProjectDescLink = ({ href, children }: { href: string; children: Re
 
 export const projects: ProjectData[] = [
   {
-    types: ["solo"],
-    title: "Portfolio Website",
-    description: "A modern, animated personal portfolio built with Next.js, Framer Motion, and Tailwind CSS. Features smooth scrolling, 3D effects, and responsive design.",
-    tags: ["Hero ui", "Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/Zuohuang-Cai/PortfolioFrontend",
-    demo: "/",
-    image: "/Projects/portfolio.png",
+    types: ["team", "client"],
+    title: "My Parts Manager",
+    description: "A comprehensive digital platform designed to streamline automotive workshop operations, parts procurement, price comparison, order management, and vehicle service workflows in one centralized system.",
+    tags: ["Hero ui", "Next.js", "TypeScript", "Tailwind CSS", "Nest.js", "Playwright", "stealthy"],
+    demo: "https://mypartsmanager.eu",
+    image: "/Projects/mypartsmanager.png",
     featured: true
   },
   {
